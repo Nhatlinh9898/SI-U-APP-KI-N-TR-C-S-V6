@@ -77,12 +77,12 @@ export const generateBlueprint = async (
                             template === 'real_estate' ? 'hero, search, virtual_tour, neighborhood, amenities, properties, metrics, mortgage_calculator, features, testimonial_carousel, map, booking, footer' :
                             template === 'agency' ? 'hero, logos, skill_radar, skill_cloud, tech_stack, partners, bento, project_results, process, team, career_path, jobs, video_testimonials, cta, footer' :
                             template === 'travel' ? 'hero, gallery, itinerary, packing_list, booking_form, features, testimonial_carousel, map, booking, footer' :
-                            template === 'clinic' ? 'hero, metrics, services, doctors, trust_badges, opening_hours, faq_search, map, booking, footer' :
+                            template === 'clinic' ? 'hero, metrics, services, appointment_form, doctors, trust_badges, opening_hours, faq_search, map, booking, footer' :
                             template === 'fitness' ? 'hero, metrics, bmi_form, workouts, classes, schedule, memberships, app_download, booking, footer' :
                             template === 'charity' ? 'hero, donation_tracker, fundraising, impact_map, donation_impact, metrics, programs, stories, volunteer_form, donate, footer' :
                             template === 'local_service' ? 'hero, pricing_calculator, services, process, testimonial_carousel, opening_hours, map, faq_search, booking, footer' :
-                            template === 'lawyer' ? 'hero, metrics, legal_services, practices, process, trust_badges, faq_search, map, booking, footer' :
-                            template === 'interior_design' ? 'hero, projects, before_after, portfolio, process, testimonial_carousel, booking, footer' :
+                            template === 'lawyer' ? 'hero, metrics, legal_services, case_studies, practices, process, trust_badges, faq_search, map, booking, footer' :
+                            template === 'interior_design' ? 'hero, project_details, projects, before_after, portfolio, process, testimonial_carousel, booking, footer' :
                             template === 'photography' ? 'hero, projects, packages, social_feed, testimonial_carousel, booking, footer' :
                             template === 'podcast' ? 'hero, audio, video_playlist, instructor, social_feed, episodes, newsletter, footer' :
                             template === 'wedding' ? 'hero, countdown, gallery, schedule, social_feed, booking, footer' :
@@ -102,7 +102,7 @@ export const generateBlueprint = async (
                             template === 'cleaning_service' ? 'hero, services, before_after, process, pricing, booking, footer' :
                             template === 'architecture' ? 'hero, projects, metrics, process, booking, footer' :
                             template === 'financial' ? 'hero, stock_ticker, calculator_preview, metrics, process, trust_badges, faq_search, booking, footer' :
-                            template === 'logistics' ? 'hero, impact_map, metrics, process, testimonial_carousel, booking, footer' :
+                            template === 'logistics' ? 'hero, tracking_preview, impact_map, metrics, process, testimonial_carousel, booking, footer' :
                             'hero, gallery, menu_tabs, menu_grid, chef_specials, recipe_detail, recipes, features, testimonial_carousel, order, footer';
                             
       prompt += `\n🔥 YÊU CẦU ĐẶC BIỆT VỀ LAYOUT (BẮT BUỘC TUÂN THỦ 100%):\n`;
@@ -118,6 +118,10 @@ export const generateBlueprint = async (
     }
 
     prompt += `- Các type hợp lệ và cấu trúc props:\n`;
+    prompt += `  + MedicalAppointmentForm: { title, subtitle, departments: [{name, icon}] } (Form đặt lịch khám bệnh đa bước)\n`;
+    prompt += `  + LegalCaseStudy: { title, subtitle, cases: [{title, category, challenge, solution, result, image}] } (Các vụ việc pháp lý tiêu biểu)\n`;
+    prompt += `  + InteriorProjectDetail: { title, subtitle, projects: [{title, style, duration, area, materials: string[], description, images: string[]}] } (Chi tiết dự án nội thất chuyên sâu)\n`;
+    prompt += `  + LogisticsLiveTracking: { title, subtitle, trackingId, steps: [{status, location, time, isCompleted}] } (Theo dõi vận chuyển thời gian thực)\n`;
     prompt += `  + PropertyGrid: { title, subtitle, properties: [{title, price, location, beds, baths, sqft, image, tag}] }\n`;
     prompt += `  + CourseCurriculum: { title, subtitle, sections: [{title, lessons: [{title, duration, isFree}]}] }\n`;
     prompt += `  + MenuGrid: { title, subtitle, items: [{name, description, price, image, tag}] }\n`;
@@ -220,7 +224,16 @@ export const generateBlueprint = async (
     prompt += `  + CallToAction: { title, description, buttonText }\n`;
     prompt += `  + Footer: { companyName, description }\n`;
     prompt += `\n- Không giải thích gì thêm ngoài JSON.\n`;
-    prompt += `- Đảm bảo các trường dữ liệu phong phú, thực chiến.`;
+    prompt += `\n🔥 HƯỚNG DẪN CHI TIẾT NỘI DUNG (CONTENT GUIDELINES):\n`;
+    prompt += `- TUYỆT ĐỐI KHÔNG sử dụng dữ liệu mẫu chung chung như "Sản phẩm 1", "Tính năng A", "Nguyễn Văn A".\n`;
+    prompt += `- PHẢI sử dụng dữ liệu thực tế, chuyên sâu theo đúng ngành nghề của website.\n`;
+    prompt += `- Ví dụ cho IntegrationDirectory: Sử dụng các tên thật như Slack, Salesforce, Zapier, Google Drive kèm mô tả giá trị thực tế của việc tích hợp.\n`;
+    prompt += `- Ví dụ cho SkillRadarChart: Sử dụng các kỹ năng chuyên môn cao như "Cloud Infrastructure", "Microservices Design", "Brand Strategy".\n`;
+    prompt += `- Ví dụ cho RecipeDetailView: Viết một công thức nấu ăn hoàn chỉnh, hấp dẫn với các bước thực hiện chi tiết và định lượng nguyên liệu chính xác.\n`;
+    prompt += `- Ví dụ cho TokenSaleProgress: Sử dụng các con số thực tế (ví dụ: $2,500,000), tên các vòng gọi vốn (Seed, Private, Public) và trạng thái cụ thể.\n`;
+    prompt += `- Ví dụ cho VenueFloorPlan: Đặt tên các khu vực sáng tạo và chuyên nghiệp (ví dụ: "The Innovation Hub", "Zen Garden Lounge", "Executive Suite").\n`;
+    prompt += `- Các đoạn văn mô tả (subtitle, description) phải có độ dài vừa đủ (2-3 câu), văn phong chuyên nghiệp, thuyết phục, không hời hợt.\n`;
+    prompt += `- Đảm bảo các trường dữ liệu phong phú, thực chiến, mang tính thương mại cao.`;
 
     const response = await ai.models.generateContent({
       model: modelId,

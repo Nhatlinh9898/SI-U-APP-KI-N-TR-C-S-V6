@@ -64,7 +64,7 @@ export const PREDEFINED_LAYOUTS: Record<string, { name: string, description: str
   clinic: {
     name: 'Phòng Khám / Y Tế',
     description: 'Giới thiệu dịch vụ y tế, đội ngũ bác sĩ và đặt lịch khám.',
-    modules: ['HeroSection', 'StatsRow', 'BentoGrid', 'TeamSection', 'TrustBadges', 'FAQSearch', 'MapSection', 'BookingCalendar', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'StatsRow', 'BentoGrid', 'MedicalAppointmentForm', 'TeamSection', 'TrustBadges', 'FAQSearch', 'MapSection', 'BookingCalendar', 'ContactForm', 'Footer']
   },
   fitness: {
     name: 'Gym / Fitness',
@@ -84,12 +84,12 @@ export const PREDEFINED_LAYOUTS: Record<string, { name: string, description: str
   lawyer: {
     name: 'Luật Sư / Pháp Lý',
     description: 'Văn phòng luật, tư vấn pháp lý. Hiển thị lĩnh vực và đặt lịch.',
-    modules: ['HeroSection', 'StatsRow', 'LegalServiceCard', 'FeatureGrid', 'ProcessFlow', 'TrustBadges', 'FAQSearch', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'StatsRow', 'LegalServiceCard', 'LegalCaseStudy', 'FeatureGrid', 'ProcessFlow', 'TrustBadges', 'FAQSearch', 'MapSection', 'ContactForm', 'Footer']
   },
   interior_design: {
     name: 'Thiết Kế Nội Thất',
     description: 'Phô diễn các dự án nội thất, quy trình làm việc và nhận yêu cầu.',
-    modules: ['HeroSection', 'ProjectMasonry', 'BeforeAfter', 'BentoGrid', 'ProcessFlow', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'InteriorProjectDetail', 'ProjectMasonry', 'BeforeAfter', 'BentoGrid', 'ProcessFlow', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   photography: {
     name: 'Nhiếp Ảnh Gia',
@@ -189,7 +189,7 @@ export const PREDEFINED_LAYOUTS: Record<string, { name: string, description: str
   logistics: {
     name: 'Vận Tải / Chuyển Nhà',
     description: 'Dịch vụ vận chuyển, logistics, chuyển nhà trọn gói.',
-    modules: ['HeroSection', 'FeatureGrid', 'ComparisonTable', 'StepByStep', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'LogisticsLiveTracking', 'FeatureGrid', 'ComparisonTable', 'StepByStep', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   bakery: {
     name: 'Tiệm Bánh / Cafe',
@@ -260,7 +260,7 @@ export interface Ecosystem {
 }
 
 export interface LayoutModule {
-  type: 'HeroSection' | 'FeatureGrid' | 'CallToAction' | 'FormSection' | 'DataList' | 'PricingTable' | 'TestimonialGrid' | 'ContactForm' | 'Footer' | 'BentoGrid' | 'StatsRow' | 'FAQAccordion' | 'StepByStep' | 'TeamSection' | 'LogoTicker' | 'VideoSection' | 'GallerySection' | 'TimelineSection' | 'NewsletterSection' | 'MapSection' | 'AppDownload' | 'ArticleGrid' | 'ComparisonTable' | 'BeforeAfter' | 'TrustBadges' | 'ServiceMenu' | 'IntegrationGrid' | 'JobBoard' | 'CountdownSection' | 'AudioPlayer' | 'ProductShowcase' | 'EventSchedule' | 'InstructorBio' | 'FundraisingProgress' | 'OpeningHours' | 'VideoTestimonials' | 'ProjectMasonry' | 'PropertyGrid' | 'CourseCurriculum' | 'MenuGrid' | 'ProcessFlow' | 'PricingMatrix' | 'SocialFeed' | 'RoadmapTimeline' | 'SkillCloud' | 'Leaderboard' | 'TokenomicsChart' | 'ItinerarySection' | 'DataMetricCard' | 'StockTicker' | 'BookingCalendar' | 'ReviewWall' | 'TechStack' | 'ImpactMap' | 'MenuTabs' | 'ProductComparison' | 'VideoPlaylist' | 'CertificateShowcase' | 'LiveChatPreview' | 'LeadMagnet' | 'PropertySearch' | 'FeatureTabs' | 'TestimonialCarousel' | 'PartnerGrid' | 'FAQSearch' | 'StickyCTA' | 'UserStatsDashboard' | 'FeatureComparisonTable' | 'FlashSaleBanner' | 'LearningPathMap' | 'DonationImpactCards' | 'VirtualTourGallery' | 'CareerPathTimeline' | 'RecipeCardGrid' | 'WorkoutPlanTable' | 'LegalServiceCard' | 'CarFeatureHighlight' | 'PetProfileCard' | 'FinancialCalculatorPreview' | 'LiveWebinarPreview' | 'ProductBundleCard' | 'PropertyAmenitiesGrid' | 'PricingToggleTable' | 'CourseModuleAccordion' | 'ProjectResultStats' | 'SystemStatusWidget' | 'ChangelogFeed' | 'NeighborhoodGuide' | 'TournamentBracket' | 'PackingListChecklist' | 'ChefSpecialCarousel' | 'JobApplicationForm' | 'EventSpeakerGrid' | 'DonationProgressTracker' | 'ServicePricingCalculator' | 'CryptoWalletConnectPreview' | 'FitnessBMIForm' | 'IntegrationDirectory' | 'SkillRadarChart' | 'VenueFloorPlan' | 'VolunteerSignupForm' | 'TokenSaleProgress' | 'RecipeDetailView' | 'SaasLayout' | 'PortfolioLayout' | 'AppPromoLayout' | 'EcommerceLayout' | 'EventLayout' | 'CreatorLayout' | 'CourseLayout' | 'RestaurantLayout' | 'RealEstateLayout' | 'AgencyLayout' | 'TravelLayout' | 'ClinicLayout' | 'FitnessLayout' | 'CharityLayout' | 'LocalServiceLayout' | 'LawyerLayout' | 'InteriorDesignLayout' | 'PhotographyLayout' | 'PodcastLayout' | 'WeddingLayout' | 'BookLaunchLayout' | 'MusicReleaseLayout' | 'GamingGuildLayout' | 'CarRentalLayout' | 'PetCareLayout' | 'CryptoProjectLayout' | 'SpaLayout' | 'RecruitmentLayout' | 'CrowdfundingLayout' | 'CoachingLayout' | 'CoworkingLayout' | 'AutoRepairLayout' | 'EducationLayout' | 'CleaningServiceLayout' | 'ArchitectureLayout' | 'FinancialLayout' | 'LogisticsLayout' | 'BakeryLayout';
+  type: 'HeroSection' | 'FeatureGrid' | 'CallToAction' | 'FormSection' | 'DataList' | 'PricingTable' | 'TestimonialGrid' | 'ContactForm' | 'Footer' | 'BentoGrid' | 'StatsRow' | 'FAQAccordion' | 'StepByStep' | 'TeamSection' | 'LogoTicker' | 'VideoSection' | 'GallerySection' | 'TimelineSection' | 'NewsletterSection' | 'MapSection' | 'AppDownload' | 'ArticleGrid' | 'ComparisonTable' | 'BeforeAfter' | 'TrustBadges' | 'ServiceMenu' | 'IntegrationGrid' | 'JobBoard' | 'CountdownSection' | 'AudioPlayer' | 'ProductShowcase' | 'EventSchedule' | 'InstructorBio' | 'FundraisingProgress' | 'OpeningHours' | 'VideoTestimonials' | 'ProjectMasonry' | 'PropertyGrid' | 'CourseCurriculum' | 'MenuGrid' | 'ProcessFlow' | 'PricingMatrix' | 'SocialFeed' | 'RoadmapTimeline' | 'SkillCloud' | 'Leaderboard' | 'TokenomicsChart' | 'ItinerarySection' | 'DataMetricCard' | 'StockTicker' | 'BookingCalendar' | 'ReviewWall' | 'TechStack' | 'ImpactMap' | 'MenuTabs' | 'ProductComparison' | 'VideoPlaylist' | 'CertificateShowcase' | 'LiveChatPreview' | 'LeadMagnet' | 'PropertySearch' | 'FeatureTabs' | 'TestimonialCarousel' | 'PartnerGrid' | 'FAQSearch' | 'StickyCTA' | 'UserStatsDashboard' | 'FeatureComparisonTable' | 'FlashSaleBanner' | 'LearningPathMap' | 'DonationImpactCards' | 'VirtualTourGallery' | 'CareerPathTimeline' | 'RecipeCardGrid' | 'WorkoutPlanTable' | 'LegalServiceCard' | 'CarFeatureHighlight' | 'PetProfileCard' | 'FinancialCalculatorPreview' | 'LiveWebinarPreview' | 'ProductBundleCard' | 'PropertyAmenitiesGrid' | 'PricingToggleTable' | 'CourseModuleAccordion' | 'ProjectResultStats' | 'SystemStatusWidget' | 'ChangelogFeed' | 'NeighborhoodGuide' | 'TournamentBracket' | 'PackingListChecklist' | 'ChefSpecialCarousel' | 'JobApplicationForm' | 'EventSpeakerGrid' | 'DonationProgressTracker' | 'ServicePricingCalculator' | 'CryptoWalletConnectPreview' | 'FitnessBMIForm' | 'IntegrationDirectory' | 'SkillRadarChart' | 'VenueFloorPlan' | 'VolunteerSignupForm' | 'TokenSaleProgress' | 'RecipeDetailView' | 'MedicalAppointmentForm' | 'LegalCaseStudy' | 'InteriorProjectDetail' | 'LogisticsLiveTracking' | 'SaasLayout' | 'PortfolioLayout' | 'AppPromoLayout' | 'EcommerceLayout' | 'EventLayout' | 'CreatorLayout' | 'CourseLayout' | 'RestaurantLayout' | 'RealEstateLayout' | 'AgencyLayout' | 'TravelLayout' | 'ClinicLayout' | 'FitnessLayout' | 'CharityLayout' | 'LocalServiceLayout' | 'LawyerLayout' | 'InteriorDesignLayout' | 'PhotographyLayout' | 'PodcastLayout' | 'WeddingLayout' | 'BookLaunchLayout' | 'MusicReleaseLayout' | 'GamingGuildLayout' | 'CarRentalLayout' | 'PetCareLayout' | 'CryptoProjectLayout' | 'SpaLayout' | 'RecruitmentLayout' | 'CrowdfundingLayout' | 'CoachingLayout' | 'CoworkingLayout' | 'AutoRepairLayout' | 'EducationLayout' | 'CleaningServiceLayout' | 'ArchitectureLayout' | 'FinancialLayout' | 'LogisticsLayout' | 'BakeryLayout';
   props: Record<string, any>;
 }
 

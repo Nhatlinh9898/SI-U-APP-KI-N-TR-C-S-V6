@@ -140,6 +140,10 @@ import { VenueFloorPlan } from './VenueFloorPlan';
 import { VolunteerSignupForm } from './VolunteerSignupForm';
 import { TokenSaleProgress } from './TokenSaleProgress';
 import { RecipeDetailView } from './RecipeDetailView';
+import { MedicalAppointmentForm } from './MedicalAppointmentForm';
+import { LegalCaseStudy } from './LegalCaseStudy';
+import { InteriorProjectDetail } from './InteriorProjectDetail';
+import { LogisticsLiveTracking } from './LogisticsLiveTracking';
 
 const moduleMap: Record<string, React.FC<any>> = {
   HeroSection: HeroSection,
@@ -243,6 +247,10 @@ const moduleMap: Record<string, React.FC<any>> = {
   VolunteerSignupForm: VolunteerSignupForm,
   TokenSaleProgress: TokenSaleProgress,
   RecipeDetailView: RecipeDetailView,
+  MedicalAppointmentForm: MedicalAppointmentForm,
+  LegalCaseStudy: LegalCaseStudy,
+  InteriorProjectDetail: InteriorProjectDetail,
+  LogisticsLiveTracking: LogisticsLiveTracking,
   SaasLayout: SaasLayout,
   PortfolioLayout: PortfolioLayout,
   AppPromoLayout: AppPromoLayout,
