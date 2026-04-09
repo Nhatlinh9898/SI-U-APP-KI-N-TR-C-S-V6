@@ -66,44 +66,44 @@ export const generateBlueprint = async (
                          template === 'financial' ? 'FinancialLayout' :
                          template === 'logistics' ? 'LogisticsLayout' : 'BakeryLayout';
                          
-      const requiredProps = template === 'saas' ? 'hero, logos, stats, bento, pricing, faq, cta, footer' : 
-                            template === 'portfolio' ? 'hero, logos, features, timeline, testimonials, contact, footer' : 
-                            template === 'app_promo' ? 'hero, video, bento, stats, features, faq, cta, footer' :
-                            template === 'ecommerce' ? 'hero, logos, categories, products, reviews, newsletter, footer' :
-                            template === 'event' ? 'hero, video, stats, timeline, team, tickets, faq, footer' :
-                            template === 'creator' ? 'profile, video, links, stats, newsletter, footer' :
-                            template === 'course' ? 'hero, video, stats, timeline, curriculum, pricing, faq, footer' :
-                            template === 'restaurant' ? 'hero, gallery, highlights, menu, reviews, reservation, footer' :
-                            template === 'real_estate' ? 'hero, gallery, market_stats, properties, testimonials, contact, footer' :
-                            template === 'agency' ? 'hero, logos, impact, services, team, testimonials, cta, footer' :
-                            template === 'travel' ? 'hero, gallery, destinations, tours, reviews, booking, footer' :
-                            template === 'clinic' ? 'hero, stats, services, doctors, faq, appointment, footer' :
-                            template === 'fitness' ? 'hero, stats, classes, process, memberships, cta, footer' :
-                            template === 'charity' ? 'hero, impact, causes, programs, stories, donate, footer' :
-                            template === 'local_service' ? 'hero, services, process, reviews, faq, quote, footer' :
-                            template === 'lawyer' ? 'hero, stats, practices, faq, consultation, footer' :
-                            template === 'interior_design' ? 'hero, gallery, portfolio, process, reviews, contact, footer' :
-                            template === 'photography' ? 'hero, gallery, packages, reviews, booking, footer' :
-                            template === 'podcast' ? 'hero, video, episodes, hosts, newsletter, footer' :
-                            template === 'wedding' ? 'hero, gallery, timeline, schedule, rsvp, footer' :
-                            template === 'book_launch' ? 'hero, video, stats, chapters, reviews, pricing, footer' :
-                            template === 'music_release' ? 'hero, video, tracklist, gallery, listen_now, footer' :
-                            template === 'gaming_guild' ? 'hero, video, achievements, roster, highlights, join_us, footer' :
-                            template === 'car_rental' ? 'hero, fleet, process, faq, booking, footer' :
-                            template === 'pet_care' ? 'hero, services, pricing, reviews, appointment, footer' :
-                            template === 'crypto_project' ? 'hero, logos, tokenomics, roadmap, team, community, footer' :
-                            template === 'spa' ? 'hero, services, pricing, reviews, booking, footer' :
-                            template === 'recruitment' ? 'hero, stats, benefits, openings, apply, footer' :
-                            template === 'crowdfunding' ? 'hero, progress, story, rewards, back_us, footer' :
-                            template === 'coaching' ? 'hero, stats, programs, success_stories, booking, footer' :
-                            template === 'coworking' ? 'hero, amenities, gallery, plans, tour, footer' :
-                            template === 'auto_repair' ? 'hero, services, process, reviews, booking, footer' :
-                            template === 'education' ? 'hero, stats, programs, reviews, enroll, footer' :
-                            template === 'cleaning_service' ? 'hero, services, process, pricing, booking, footer' :
-                            template === 'architecture' ? 'hero, portfolio, stats, process, contact, footer' :
-                            template === 'financial' ? 'hero, services, stats, faq, consultation, footer' :
-                            template === 'logistics' ? 'hero, services, process, reviews, quote, footer' :
-                            'hero, menu, features, reviews, order, footer';
+      const requiredProps = template === 'saas' ? 'hero, logos, products, metrics, integrations, tech_stack, pricing_matrix, roadmap, live_chat, video_testimonials, faq, articles, cta, footer' : 
+                            template === 'portfolio' ? 'hero, logos, skill_cloud, tech_stack, projects, timeline, certificates, social_feed, reviews, contact, footer' : 
+                            template === 'app_promo' ? 'hero, video, products, metrics, integrations, tech_stack, app_download, faq, cta, footer' :
+                            template === 'ecommerce' ? 'hero, logos, comparison, products, bento, trust_badges, reviews, app_download, newsletter, footer' :
+                            template === 'event' ? 'hero, countdown, video, itinerary, schedule, team, pricing, map, faq, footer' :
+                            template === 'creator' ? 'profile, video, links, metrics, social_feed, articles, lead_magnet, newsletter, footer' :
+                            template === 'course' ? 'hero, video_playlist, metrics, instructor, curriculum, certificates, features, pricing, faq, footer' :
+                            template === 'restaurant' ? 'hero, gallery, menu_tabs, menu_grid, highlights, reviews, opening_hours, map, booking, footer' :
+                            template === 'real_estate' ? 'hero, search, properties, metrics, features, reviews, map, booking, footer' :
+                            template === 'agency' ? 'hero, logos, skill_cloud, tech_stack, bento, process, team, jobs, video_testimonials, cta, footer' :
+                            template === 'travel' ? 'hero, gallery, itinerary, features, reviews, map, booking, footer' :
+                            template === 'clinic' ? 'hero, metrics, services, doctors, trust_badges, opening_hours, faq, map, booking, footer' :
+                            template === 'fitness' ? 'hero, metrics, classes, schedule, memberships, app_download, booking, footer' :
+                            template === 'charity' ? 'hero, fundraising, impact_map, metrics, programs, stories, donate, footer' :
+                            template === 'local_service' ? 'hero, services, process, reviews, opening_hours, map, faq, booking, footer' :
+                            template === 'lawyer' ? 'hero, metrics, practices, process, trust_badges, faq, map, booking, footer' :
+                            template === 'interior_design' ? 'hero, projects, before_after, portfolio, process, reviews, booking, footer' :
+                            template === 'photography' ? 'hero, projects, packages, social_feed, reviews, booking, footer' :
+                            template === 'podcast' ? 'hero, audio, video_playlist, instructor, social_feed, episodes, newsletter, footer' :
+                            template === 'wedding' ? 'hero, countdown, gallery, schedule, social_feed, booking, footer' :
+                            template === 'book_launch' ? 'hero, countdown, video, instructor, metrics, chapters, social_feed, reviews, pricing, footer' :
+                            template === 'music_release' ? 'hero, audio, video, social_feed, gallery, listen_now, footer' :
+                            template === 'gaming_guild' ? 'hero, video, leaderboard, social_feed, roster, highlights, join_us, footer' :
+                            template === 'car_rental' ? 'hero, products, process, faq, booking, footer' :
+                            template === 'pet_care' ? 'hero, menu_tabs, menu_grid, services, reviews, booking, footer' :
+                            template === 'crypto_project' ? 'hero, stock_ticker, countdown, tokenomics, metrics, process, roadmap, team, community, footer' :
+                            template === 'spa' ? 'hero, menu_tabs, menu_grid, before_after, reviews, opening_hours, booking, footer' :
+                            template === 'recruitment' ? 'hero, metrics, benefits, process, jobs, apply, footer' :
+                            template === 'crowdfunding' ? 'hero, fundraising, metrics, story, process, rewards, back_us, footer' :
+                            template === 'coaching' ? 'hero, instructor, metrics, process, programs, reviews, booking, footer' :
+                            template === 'coworking' ? 'hero, amenities, gallery, plans, process, booking, footer' :
+                            template === 'auto_repair' ? 'hero, services, before_after, process, reviews, map, booking, footer' :
+                            template === 'education' ? 'hero, metrics, programs, curriculum, certificates, reviews, map, booking, footer' :
+                            template === 'cleaning_service' ? 'hero, services, before_after, process, pricing, booking, footer' :
+                            template === 'architecture' ? 'hero, projects, metrics, process, booking, footer' :
+                            template === 'financial' ? 'hero, stock_ticker, metrics, process, trust_badges, faq, booking, footer' :
+                            template === 'logistics' ? 'hero, impact_map, metrics, process, reviews, booking, footer' :
+                            'hero, menu_tabs, menu_grid, features, reviews, order, footer';
                             
       prompt += `\n🔥 YÊU CẦU ĐẶC BIỆT VỀ LAYOUT (BẮT BUỘC TUÂN THỦ 100%):\n`;
       prompt += `- Người dùng đã chọn layout mẫu: ${PREDEFINED_LAYOUTS[template].name}.\n`;
@@ -118,6 +118,54 @@ export const generateBlueprint = async (
     }
 
     prompt += `- Các type hợp lệ và cấu trúc props:\n`;
+    prompt += `  + PropertyGrid: { title, subtitle, properties: [{title, price, location, beds, baths, sqft, image, tag}] }\n`;
+    prompt += `  + CourseCurriculum: { title, subtitle, sections: [{title, lessons: [{title, duration, isFree}]}] }\n`;
+    prompt += `  + MenuGrid: { title, subtitle, items: [{name, description, price, image, tag}] }\n`;
+    prompt += `  + ProcessFlow: { title, subtitle, steps: [{title, description, icon}] }\n`;
+    prompt += `  + PricingMatrix: { title, subtitle, tiers: [{name, price}], features: [{name, availability: boolean[]}] }\n`;
+    prompt += `  + SocialFeed: { title, subtitle, posts: [{user, handle, avatar, content, image, likes, comments, date}] }\n`;
+    prompt += `  + EventSchedule: { title, subtitle, days: [{date, events: [{time, title, speaker, description}]}] }\n`;
+    prompt += `  + InstructorBio: { name, role, bio, stats: [{label, value}], image }\n`;
+    prompt += `  + FundraisingProgress: { title, goal, current, backers, daysLeft, story }\n`;
+    prompt += `  + OpeningHours: { title, hours: [{day, time}], image }\n`;
+    prompt += `  + VideoTestimonials: { title, testimonials: [{name, role, quote, videoThumbnail, videoUrl}] }\n`;
+    prompt += `  + ProjectMasonry: { title, projects: [{title, category, image}] }\n`;
+    prompt += `  + ServiceMenu: { title, categories: [{name, items: [{name, description, price}]}] }\n`;
+    prompt += `  + IntegrationGrid: { title, integrations: [{name, icon, description}] }\n`;
+    prompt += `  + JobBoard: { title, jobs: [{title, department, location, type, salary}] }\n`;
+    prompt += `  + CountdownSection: { title, targetDate, description }\n`;
+    prompt += `  + AudioPlayer: { title, trackName, artist, audioUrl, coverImage }\n`;
+    prompt += `  + ProductShowcase: { title, products: [{name, description, image, features: string[], price, reverse: boolean}] }\n`;
+    prompt += `  + ArticleGrid: { title, articles: [{title, excerpt, date, author, image, category}] }\n`;
+    prompt += `  + ComparisonTable: { title, columns: string[], rows: [{name, values: string[]}] }\n`;
+    prompt += `  + BeforeAfter: { title, beforeImage, afterImage, description }\n`;
+    prompt += `  + TrustBadges: { title, badges: [{label, icon}] }\n`;
+    prompt += `  + MapSection: { title, address, lat, lng, zoom }\n`;
+    prompt += `  + AppDownload: { title, description, image, appStoreUrl, playStoreUrl }\n`;
+    prompt += `  + NewsletterSection: { title, subtitle, buttonText }\n`;
+    prompt += `  + TimelineSection: { title, items: [{year, title, description}] }\n`;
+    prompt += `  + GallerySection: { title, images: string[] }\n`;
+    prompt += `  + VideoSection: { title, videoUrl, thumbnail }\n`;
+    prompt += `  + LogoTicker: { title, logos: string[] }\n`;
+    prompt += `  + TeamSection: { title, members: [{name, role, image, bio}] }\n`;
+    prompt += `  + RoadmapTimeline: { title, subtitle, items: [{quarter, title, description, status: 'completed'|'in-progress'|'planned'}] }\n`;
+    prompt += `  + SkillCloud: { title, subtitle, skills: [{name, level, category}] }\n`;
+    prompt += `  + Leaderboard: { title, subtitle, items: [{rank, name, score, avatar, trend: 'up'|'down'|'stable'}] }\n`;
+    prompt += `  + TokenomicsChart: { title, subtitle, allocations: [{label, percentage, color, description}], total_supply }\n`;
+    prompt += `  + ItinerarySection: { title, subtitle, days: [{day, title, activities: [{time, title, description}]}] }\n`;
+    prompt += `  + DataMetricCard: { title, subtitle, metrics: [{label, value, change, isPositive, icon}] }\n`;
+    prompt += `  + StockTicker: { title, stocks: [{symbol, price, change, isPositive}] } (Thanh chạy giá chứng khoán/crypto)\n`;
+    prompt += `  + BookingCalendar: { title, subtitle, slots: [{time, available}] } (Đặt lịch hẹn)\n`;
+    prompt += `  + ReviewWall: { title, subtitle, reviews: [{name, role, content, avatar, rating}] } (Tường đánh giá dày đặc)\n`;
+    prompt += `  + TechStack: { title, subtitle, techs: [{name, icon, description}] } (Grid công nghệ/công cụ)\n`;
+    prompt += `  + ImpactMap: { title, subtitle, locations: [{name, stats, description, lat, lng}] } (Bản đồ tác động/vị trí)\n`;
+    prompt += `  + MenuTabs: { title, subtitle, categories: [{name, items: [{name, description, price, image}]}] } (Thực đơn chia tab)\n`;
+    prompt += `  + ProductComparison: { title, subtitle, products: [{name, image, price, features: [{name, value}], buttonText, isPopular}] } (So sánh sản phẩm trực quan)\n`;
+    prompt += `  + VideoPlaylist: { title, subtitle, videos: [{title, duration, thumbnail, url}] } (Trình phát video có danh sách)\n`;
+    prompt += `  + CertificateShowcase: { title, subtitle, certificates: [{title, issuer, date, image}] } (Trưng bày chứng chỉ/giải thưởng)\n`;
+    prompt += `  + LiveChatPreview: { title, subtitle, messages: [{user, text, time, isBot}] } (Mô phỏng khung chat trực tuyến)\n`;
+    prompt += `  + LeadMagnet: { title, subtitle, description, buttonText, image } (Kêu gọi đăng ký nhận quà/ebook)\n`;
+    prompt += `  + PropertySearch: { title, subtitle } (Thanh tìm kiếm BĐS chuyên sâu)\n`;
     prompt += `  + HeroSection: { title, subtitle, cta_text }\n`;
     prompt += `  + BentoGrid: { title, subtitle, items: [{title, description, icon, size: 'small'|'medium'|'large'}] } (Dùng để show tính năng nổi bật kiểu Apple)\n`;
     prompt += `  + StatsRow: { stats: [{label, value, suffix}] } (Dùng để show con số ấn tượng)\n`;

@@ -62,6 +62,42 @@ import { ArticleGrid } from './ArticleGrid';
 import { ComparisonTable } from './ComparisonTable';
 import { BeforeAfter } from './BeforeAfter';
 import { TrustBadges } from './TrustBadges';
+import { ServiceMenu } from './ServiceMenu';
+import { IntegrationGrid } from './IntegrationGrid';
+import { JobBoard } from './JobBoard';
+import { CountdownSection } from './CountdownSection';
+import { AudioPlayer } from './AudioPlayer';
+import { ProductShowcase } from './ProductShowcase';
+import { EventSchedule } from './EventSchedule';
+import { InstructorBio } from './InstructorBio';
+import { FundraisingProgress } from './FundraisingProgress';
+import { OpeningHours } from './OpeningHours';
+import { VideoTestimonials } from './VideoTestimonials';
+import { ProjectMasonry } from './ProjectMasonry';
+import { PropertyGrid } from './PropertyGrid';
+import { CourseCurriculum } from './CourseCurriculum';
+import { MenuGrid } from './MenuGrid';
+import { ProcessFlow } from './ProcessFlow';
+import { PricingMatrix } from './PricingMatrix';
+import { SocialFeed } from './SocialFeed';
+import { RoadmapTimeline } from './RoadmapTimeline';
+import { SkillCloud } from './SkillCloud';
+import { Leaderboard } from './Leaderboard';
+import { TokenomicsChart } from './TokenomicsChart';
+import { ItinerarySection } from './ItinerarySection';
+import { DataMetricCard } from './DataMetricCard';
+import { StockTicker } from './StockTicker';
+import { BookingCalendar } from './BookingCalendar';
+import { ReviewWall } from './ReviewWall';
+import { TechStack } from './TechStack';
+import { ImpactMap } from './ImpactMap';
+import { MenuTabs } from './MenuTabs';
+import { ProductComparison } from './ProductComparison';
+import { VideoPlaylist } from './VideoPlaylist';
+import { CertificateShowcase } from './CertificateShowcase';
+import { LiveChatPreview } from './LiveChatPreview';
+import { LeadMagnet } from './LeadMagnet';
+import { PropertySearch } from './PropertySearch';
 
 const moduleMap: Record<string, React.FC<any>> = {
   HeroSection: HeroSection,
@@ -87,6 +123,42 @@ const moduleMap: Record<string, React.FC<any>> = {
   ComparisonTable: ComparisonTable,
   BeforeAfter: BeforeAfter,
   TrustBadges: TrustBadges,
+  ServiceMenu: ServiceMenu,
+  IntegrationGrid: IntegrationGrid,
+  JobBoard: JobBoard,
+  CountdownSection: CountdownSection,
+  AudioPlayer: AudioPlayer,
+  ProductShowcase: ProductShowcase,
+  EventSchedule: EventSchedule,
+  InstructorBio: InstructorBio,
+  FundraisingProgress: FundraisingProgress,
+  OpeningHours: OpeningHours,
+  VideoTestimonials: VideoTestimonials,
+  ProjectMasonry: ProjectMasonry,
+  PropertyGrid: PropertyGrid,
+  CourseCurriculum: CourseCurriculum,
+  MenuGrid: MenuGrid,
+  ProcessFlow: ProcessFlow,
+  PricingMatrix: PricingMatrix,
+  SocialFeed: SocialFeed,
+  RoadmapTimeline: RoadmapTimeline,
+  SkillCloud: SkillCloud,
+  Leaderboard: Leaderboard,
+  TokenomicsChart: TokenomicsChart,
+  ItinerarySection: ItinerarySection,
+  DataMetricCard: DataMetricCard,
+  StockTicker: StockTicker,
+  BookingCalendar: BookingCalendar,
+  ReviewWall: ReviewWall,
+  TechStack: TechStack,
+  ImpactMap: ImpactMap,
+  MenuTabs: MenuTabs,
+  ProductComparison: ProductComparison,
+  VideoPlaylist: VideoPlaylist,
+  CertificateShowcase: CertificateShowcase,
+  LiveChatPreview: LiveChatPreview,
+  LeadMagnet: LeadMagnet,
+  PropertySearch: PropertySearch,
   SaasLayout: SaasLayout,
   PortfolioLayout: PortfolioLayout,
   AppPromoLayout: AppPromoLayout,

@@ -9,52 +9,52 @@ export const PREDEFINED_LAYOUTS: Record<string, { name: string, description: str
   saas: {
     name: 'SaaS / B2B',
     description: 'Chuẩn Landing Page bán phần mềm, dịch vụ.',
-    modules: ['HeroSection', 'LogoTicker', 'StatsRow', 'BentoGrid', 'ComparisonTable', 'PricingTable', 'FAQAccordion', 'ArticleGrid', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'LogoTicker', 'ProductShowcase', 'StatsRow', 'IntegrationGrid', 'PricingMatrix', 'VideoTestimonials', 'FAQAccordion', 'ArticleGrid', 'CallToAction', 'Footer']
   },
   portfolio: {
     name: 'Hồ Sơ Năng Lực',
     description: 'Giới thiệu bản thân, dịch vụ cá nhân, agency.',
-    modules: ['HeroSection', 'LogoTicker', 'FeatureGrid', 'TimelineSection', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'LogoTicker', 'FeatureGrid', 'ProjectMasonry', 'TimelineSection', 'SocialFeed', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   app_promo: {
     name: 'Giới Thiệu App',
     description: 'Trang quảng bá ứng dụng di động.',
-    modules: ['HeroSection', 'VideoSection', 'BentoGrid', 'StatsRow', 'FeatureGrid', 'AppDownload', 'FAQAccordion', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'VideoSection', 'ProductShowcase', 'StatsRow', 'IntegrationGrid', 'AppDownload', 'FAQAccordion', 'CallToAction', 'Footer']
   },
   ecommerce: {
     name: 'Thương Mại Điện Tử',
     description: 'Tối ưu cho bán hàng, giới thiệu sản phẩm, danh mục.',
-    modules: ['HeroSection', 'LogoTicker', 'BentoGrid', 'FeatureGrid', 'TrustBadges', 'TestimonialGrid', 'AppDownload', 'NewsletterSection', 'Footer']
+    modules: ['HeroSection', 'LogoTicker', 'ProductShowcase', 'BentoGrid', 'TrustBadges', 'TestimonialGrid', 'AppDownload', 'NewsletterSection', 'Footer']
   },
   event: {
     name: 'Sự Kiện / Webinar',
     description: 'Dành cho tổ chức sự kiện, hội thảo. Có lịch trình, diễn giả và vé.',
-    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'TimelineSection', 'TeamSection', 'PricingTable', 'MapSection', 'FAQAccordion', 'Footer']
+    modules: ['HeroSection', 'CountdownSection', 'VideoSection', 'StatsRow', 'EventSchedule', 'TeamSection', 'PricingTable', 'MapSection', 'FAQAccordion', 'Footer']
   },
   creator: {
     name: 'Creator / Link in Bio',
     description: 'Trang cá nhân cho Creator, tổng hợp link, chỉ số mạng xã hội.',
-    modules: ['HeroSection', 'VideoSection', 'DataList', 'StatsRow', 'ArticleGrid', 'NewsletterSection', 'Footer']
+    modules: ['HeroSection', 'VideoSection', 'DataList', 'StatsRow', 'SocialFeed', 'ArticleGrid', 'NewsletterSection', 'Footer']
   },
   course: {
     name: 'Khóa Học Online',
     description: 'Tối ưu cho việc bán khóa học, e-learning. Có lộ trình học và học phí.',
-    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'TimelineSection', 'FeatureGrid', 'PricingTable', 'FAQAccordion', 'Footer']
+    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'InstructorBio', 'CourseCurriculum', 'FeatureGrid', 'PricingTable', 'FAQAccordion', 'Footer']
   },
   restaurant: {
     name: 'Nhà Hàng / F&B',
     description: 'Giới thiệu không gian, thực đơn nổi bật và đặt bàn.',
-    modules: ['HeroSection', 'GallerySection', 'BentoGrid', 'FeatureGrid', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'GallerySection', 'MenuGrid', 'ServiceMenu', 'BentoGrid', 'TestimonialGrid', 'OpeningHours', 'MapSection', 'ContactForm', 'Footer']
   },
   real_estate: {
     name: 'Bất Động Sản',
     description: 'Dành cho dự án BĐS, môi giới. Hiển thị danh sách nhà và form tư vấn.',
-    modules: ['HeroSection', 'GallerySection', 'StatsRow', 'FeatureGrid', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'PropertyGrid', 'StatsRow', 'FeatureGrid', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
   },
   agency: {
     name: 'Agency / Dịch Vụ',
     description: 'Trang đích cho các công ty dịch vụ, tư vấn, marketing agency.',
-    modules: ['HeroSection', 'LogoTicker', 'StatsRow', 'BentoGrid', 'TeamSection', 'TestimonialGrid', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'LogoTicker', 'StatsRow', 'BentoGrid', 'ProcessFlow', 'TeamSection', 'JobBoard', 'VideoTestimonials', 'CallToAction', 'Footer']
   },
   travel: {
     name: 'Du Lịch / Tour',
@@ -79,102 +79,102 @@ export const PREDEFINED_LAYOUTS: Record<string, { name: string, description: str
   local_service: {
     name: 'Dịch Vụ Địa Phương',
     description: 'Sửa chữa, dọn dẹp, spa... Tập trung vào dịch vụ và nhận báo giá.',
-    modules: ['HeroSection', 'FeatureGrid', 'StepByStep', 'TestimonialGrid', 'MapSection', 'FAQAccordion', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'FeatureGrid', 'ProcessFlow', 'TestimonialGrid', 'OpeningHours', 'MapSection', 'FAQAccordion', 'ContactForm', 'Footer']
   },
   lawyer: {
     name: 'Luật Sư / Pháp Lý',
     description: 'Văn phòng luật, tư vấn pháp lý. Hiển thị lĩnh vực và đặt lịch.',
-    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'TrustBadges', 'FAQAccordion', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'ProcessFlow', 'TrustBadges', 'FAQAccordion', 'MapSection', 'ContactForm', 'Footer']
   },
   interior_design: {
     name: 'Thiết Kế Nội Thất',
     description: 'Phô diễn các dự án nội thất, quy trình làm việc và nhận yêu cầu.',
-    modules: ['HeroSection', 'GallerySection', 'BeforeAfter', 'BentoGrid', 'StepByStep', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'ProjectMasonry', 'BeforeAfter', 'BentoGrid', 'ProcessFlow', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   photography: {
     name: 'Nhiếp Ảnh Gia',
     description: 'Trưng bày bộ sưu tập ảnh, bảng giá chụp và form book lịch.',
-    modules: ['HeroSection', 'GallerySection', 'BentoGrid', 'PricingTable', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'ProjectMasonry', 'PricingTable', 'SocialFeed', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   podcast: {
     name: 'Podcast / Show',
     description: 'Trang chủ cho Podcast, danh sách tập mới, host và link nghe.',
-    modules: ['HeroSection', 'VideoSection', 'DataList', 'FeatureGrid', 'NewsletterSection', 'Footer']
+    modules: ['HeroSection', 'AudioPlayer', 'VideoSection', 'InstructorBio', 'SocialFeed', 'FeatureGrid', 'NewsletterSection', 'Footer']
   },
   wedding: {
     name: 'Thiệp Cưới / Sự Kiện',
     description: 'Trang thông tin đám cưới, đếm ngược, lịch trình và RSVP.',
-    modules: ['HeroSection', 'GallerySection', 'TimelineSection', 'BentoGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'CountdownSection', 'GallerySection', 'EventSchedule', 'SocialFeed', 'BentoGrid', 'ContactForm', 'Footer']
   },
   book_launch: {
     name: 'Ra Mắt Sách',
     description: 'Giới thiệu sách mới, các chương nổi bật và đặt mua.',
-    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'BentoGrid', 'TestimonialGrid', 'PricingTable', 'Footer']
+    modules: ['HeroSection', 'CountdownSection', 'VideoSection', 'InstructorBio', 'StatsRow', 'BentoGrid', 'SocialFeed', 'TestimonialGrid', 'PricingTable', 'Footer']
   },
   music_release: {
     name: 'Ra Mắt Âm Nhạc',
     description: 'Trang quảng bá album/single, danh sách bài hát và tour diễn.',
-    modules: ['HeroSection', 'VideoSection', 'DataList', 'GallerySection', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'AudioPlayer', 'VideoSection', 'SocialFeed', 'GallerySection', 'CallToAction', 'Footer']
   },
   gaming_guild: {
     name: 'Cộng Đồng Game',
     description: 'Trang chủ cho Clan, eSports team, thành tích và tuyển thành viên.',
-    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'TeamSection', 'BentoGrid', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'VideoSection', 'StatsRow', 'SocialFeed', 'TeamSection', 'BentoGrid', 'CallToAction', 'Footer']
   },
   car_rental: {
     name: 'Cho Thuê Xe',
     description: 'Danh sách xe cho thuê, quy trình và form đặt xe.',
-    modules: ['HeroSection', 'FeatureGrid', 'StepByStep', 'FAQAccordion', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'ProductShowcase', 'ProcessFlow', 'FAQAccordion', 'ContactForm', 'Footer']
   },
   pet_care: {
     name: 'Chăm Sóc Thú Cưng',
     description: 'Dịch vụ thú y, spa thú cưng, bảng giá và đặt lịch.',
-    modules: ['HeroSection', 'FeatureGrid', 'PricingTable', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'MenuGrid', 'ServiceMenu', 'FeatureGrid', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   crypto_project: {
     name: 'Dự Án Crypto / Web3',
     description: 'Giới thiệu dự án blockchain, tokenomics, roadmap và team.',
-    modules: ['HeroSection', 'LogoTicker', 'StatsRow', 'TimelineSection', 'TeamSection', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'CountdownSection', 'LogoTicker', 'StatsRow', 'ProcessFlow', 'TimelineSection', 'TeamSection', 'CallToAction', 'Footer']
   },
   spa: {
     name: 'Spa / Thẩm Mỹ Viện',
     description: 'Giới thiệu dịch vụ làm đẹp, bảng giá và đặt lịch hẹn.',
-    modules: ['HeroSection', 'FeatureGrid', 'BeforeAfter', 'PricingTable', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'MenuGrid', 'ServiceMenu', 'BeforeAfter', 'TestimonialGrid', 'OpeningHours', 'ContactForm', 'Footer']
   },
   recruitment: {
     name: 'Tuyển Dụng / Việc Làm',
     description: 'Trang tuyển dụng nhân sự, văn hóa công ty và danh sách việc làm.',
-    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'DataList', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'ProcessFlow', 'JobBoard', 'CallToAction', 'Footer']
   },
   crowdfunding: {
     name: 'Gọi Vốn / Crowdfunding',
     description: 'Trang gọi vốn dự án, tiến độ, câu chuyện và các gói tài trợ.',
-    modules: ['HeroSection', 'StatsRow', 'BentoGrid', 'PricingTable', 'CallToAction', 'Footer']
+    modules: ['HeroSection', 'FundraisingProgress', 'StatsRow', 'BentoGrid', 'ProcessFlow', 'PricingTable', 'CallToAction', 'Footer']
   },
   coaching: {
     name: 'Coaching / Tư Vấn',
     description: 'Trang cá nhân cho chuyên gia tư vấn, khóa học và đặt lịch.',
-    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'TestimonialGrid', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'InstructorBio', 'StatsRow', 'ProcessFlow', 'FeatureGrid', 'TestimonialGrid', 'ContactForm', 'Footer']
   },
   coworking: {
     name: 'Coworking Space',
     description: 'Giới thiệu không gian làm việc chung, tiện ích và bảng giá thuê.',
-    modules: ['HeroSection', 'FeatureGrid', 'GallerySection', 'BentoGrid', 'PricingTable', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'FeatureGrid', 'GallerySection', 'BentoGrid', 'ProcessFlow', 'PricingTable', 'MapSection', 'ContactForm', 'Footer']
   },
   auto_repair: {
     name: 'Gara / Sửa Xe',
     description: 'Dịch vụ bảo dưỡng, sửa chữa ô tô/xe máy và đặt lịch.',
-    modules: ['HeroSection', 'FeatureGrid', 'BeforeAfter', 'StepByStep', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'FeatureGrid', 'BeforeAfter', 'ProcessFlow', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
   },
   education: {
     name: 'Trường Học / Đào Tạo',
     description: 'Trung tâm ngoại ngữ, trường học. Hiển thị chương trình và đăng ký.',
-    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'StatsRow', 'FeatureGrid', 'CourseCurriculum', 'TestimonialGrid', 'MapSection', 'ContactForm', 'Footer']
   },
   cleaning_service: {
     name: 'Dịch Vụ Vệ Sinh',
     description: 'Vệ sinh công nghiệp, dọn nhà. Hiển thị bảng giá và đặt lịch.',
-    modules: ['HeroSection', 'FeatureGrid', 'BeforeAfter', 'StepByStep', 'PricingTable', 'ContactForm', 'Footer']
+    modules: ['HeroSection', 'FeatureGrid', 'BeforeAfter', 'ProcessFlow', 'PricingTable', 'ContactForm', 'Footer']
   },
   architecture: {
     name: 'Kiến Trúc / Xây Dựng',
@@ -260,7 +260,7 @@ export interface Ecosystem {
 }
 
 export interface LayoutModule {
-  type: 'HeroSection' | 'FeatureGrid' | 'CallToAction' | 'FormSection' | 'DataList' | 'PricingTable' | 'TestimonialGrid' | 'ContactForm' | 'Footer' | 'BentoGrid' | 'StatsRow' | 'FAQAccordion' | 'StepByStep' | 'TeamSection' | 'LogoTicker' | 'VideoSection' | 'GallerySection' | 'TimelineSection' | 'NewsletterSection' | 'MapSection' | 'AppDownload' | 'ArticleGrid' | 'ComparisonTable' | 'BeforeAfter' | 'TrustBadges' | 'SaasLayout' | 'PortfolioLayout' | 'AppPromoLayout' | 'EcommerceLayout' | 'EventLayout' | 'CreatorLayout' | 'CourseLayout' | 'RestaurantLayout' | 'RealEstateLayout' | 'AgencyLayout' | 'TravelLayout' | 'ClinicLayout' | 'FitnessLayout' | 'CharityLayout' | 'LocalServiceLayout' | 'LawyerLayout' | 'InteriorDesignLayout' | 'PhotographyLayout' | 'PodcastLayout' | 'WeddingLayout' | 'BookLaunchLayout' | 'MusicReleaseLayout' | 'GamingGuildLayout' | 'CarRentalLayout' | 'PetCareLayout' | 'CryptoProjectLayout' | 'SpaLayout' | 'RecruitmentLayout' | 'CrowdfundingLayout' | 'CoachingLayout' | 'CoworkingLayout' | 'AutoRepairLayout' | 'EducationLayout' | 'CleaningServiceLayout' | 'ArchitectureLayout' | 'FinancialLayout' | 'LogisticsLayout' | 'BakeryLayout';
+  type: 'HeroSection' | 'FeatureGrid' | 'CallToAction' | 'FormSection' | 'DataList' | 'PricingTable' | 'TestimonialGrid' | 'ContactForm' | 'Footer' | 'BentoGrid' | 'StatsRow' | 'FAQAccordion' | 'StepByStep' | 'TeamSection' | 'LogoTicker' | 'VideoSection' | 'GallerySection' | 'TimelineSection' | 'NewsletterSection' | 'MapSection' | 'AppDownload' | 'ArticleGrid' | 'ComparisonTable' | 'BeforeAfter' | 'TrustBadges' | 'ServiceMenu' | 'IntegrationGrid' | 'JobBoard' | 'CountdownSection' | 'AudioPlayer' | 'ProductShowcase' | 'EventSchedule' | 'InstructorBio' | 'FundraisingProgress' | 'OpeningHours' | 'VideoTestimonials' | 'ProjectMasonry' | 'PropertyGrid' | 'CourseCurriculum' | 'MenuGrid' | 'ProcessFlow' | 'PricingMatrix' | 'SocialFeed' | 'RoadmapTimeline' | 'SkillCloud' | 'Leaderboard' | 'TokenomicsChart' | 'ItinerarySection' | 'DataMetricCard' | 'StockTicker' | 'BookingCalendar' | 'ReviewWall' | 'TechStack' | 'ImpactMap' | 'MenuTabs' | 'ProductComparison' | 'VideoPlaylist' | 'CertificateShowcase' | 'LiveChatPreview' | 'LeadMagnet' | 'PropertySearch' | 'SaasLayout' | 'PortfolioLayout' | 'AppPromoLayout' | 'EcommerceLayout' | 'EventLayout' | 'CreatorLayout' | 'CourseLayout' | 'RestaurantLayout' | 'RealEstateLayout' | 'AgencyLayout' | 'TravelLayout' | 'ClinicLayout' | 'FitnessLayout' | 'CharityLayout' | 'LocalServiceLayout' | 'LawyerLayout' | 'InteriorDesignLayout' | 'PhotographyLayout' | 'PodcastLayout' | 'WeddingLayout' | 'BookLaunchLayout' | 'MusicReleaseLayout' | 'GamingGuildLayout' | 'CarRentalLayout' | 'PetCareLayout' | 'CryptoProjectLayout' | 'SpaLayout' | 'RecruitmentLayout' | 'CrowdfundingLayout' | 'CoachingLayout' | 'CoworkingLayout' | 'AutoRepairLayout' | 'EducationLayout' | 'CleaningServiceLayout' | 'ArchitectureLayout' | 'FinancialLayout' | 'LogisticsLayout' | 'BakeryLayout';
   props: Record<string, any>;
 }
 
