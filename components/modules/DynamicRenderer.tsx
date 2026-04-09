@@ -128,6 +128,18 @@ import { NeighborhoodGuide } from './NeighborhoodGuide';
 import { TournamentBracket } from './TournamentBracket';
 import { PackingListChecklist } from './PackingListChecklist';
 import { ChefSpecialCarousel } from './ChefSpecialCarousel';
+import { JobApplicationForm } from './JobApplicationForm';
+import { EventSpeakerGrid } from './EventSpeakerGrid';
+import { DonationProgressTracker } from './DonationProgressTracker';
+import { ServicePricingCalculator } from './ServicePricingCalculator';
+import { CryptoWalletConnectPreview } from './CryptoWalletConnectPreview';
+import { FitnessBMIForm } from './FitnessBMIForm';
+import { IntegrationDirectory } from './IntegrationDirectory';
+import { SkillRadarChart } from './SkillRadarChart';
+import { VenueFloorPlan } from './VenueFloorPlan';
+import { VolunteerSignupForm } from './VolunteerSignupForm';
+import { TokenSaleProgress } from './TokenSaleProgress';
+import { RecipeDetailView } from './RecipeDetailView';
 
 const moduleMap: Record<string, React.FC<any>> = {
   HeroSection: HeroSection,
@@ -219,6 +231,18 @@ const moduleMap: Record<string, React.FC<any>> = {
   TournamentBracket: TournamentBracket,
   PackingListChecklist: PackingListChecklist,
   ChefSpecialCarousel: ChefSpecialCarousel,
+  JobApplicationForm: JobApplicationForm,
+  EventSpeakerGrid: EventSpeakerGrid,
+  DonationProgressTracker: DonationProgressTracker,
+  ServicePricingCalculator: ServicePricingCalculator,
+  CryptoWalletConnectPreview: CryptoWalletConnectPreview,
+  FitnessBMIForm: FitnessBMIForm,
+  IntegrationDirectory: IntegrationDirectory,
+  SkillRadarChart: SkillRadarChart,
+  VenueFloorPlan: VenueFloorPlan,
+  VolunteerSignupForm: VolunteerSignupForm,
+  TokenSaleProgress: TokenSaleProgress,
+  RecipeDetailView: RecipeDetailView,
   SaasLayout: SaasLayout,
   PortfolioLayout: PortfolioLayout,
   AppPromoLayout: AppPromoLayout,
