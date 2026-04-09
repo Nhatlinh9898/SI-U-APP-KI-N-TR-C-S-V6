@@ -15,7 +15,19 @@ interface Article {
   isFeatured?: boolean;
 }
 
-export const ArticleGrid = ({ title, subtitle, articles, primary_color = 'blue' }: any) => {
+export const ArticleGrid = ({ title, subtitle, articles, primary_color = '#3b82f6' }: any) => {
+  const [activeCategory, setActiveCategory] = React.useState('All');
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const categories = ['All', ...new Set((articles || []).filter((a: any) => a.category).map((a: any) => a.category))];
+
+  const filteredArticles = articles?.filter((a: any) => {
+    const matchesCategory = activeCategory === 'All' || a.category === activeCategory;
+    const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         a.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   return (
     <section className="py-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,13 +36,40 @@ export const ArticleGrid = ({ title, subtitle, articles, primary_color = 'blue' 
             <h2 className="text-5xl md:text-8xl font-black text-gray-900 mb-8 tracking-tighter leading-none">{title || 'Tin tức & Bài viết'}</h2>
             <p className="text-xl text-gray-500 leading-relaxed font-medium">{subtitle || 'Cập nhật những kiến thức mới nhất và xu hướng dẫn đầu trong ngành.'}</p>
           </div>
-          <button className="px-10 py-5 bg-gray-50 text-gray-900 rounded-[24px] font-black text-xs uppercase tracking-[0.2em] hover:bg-gray-900 hover:text-white transition-all border border-gray-100">
-            Xem tất cả bài viết
-          </button>
+          <div className="flex flex-col gap-4">
+            <div className="relative">
+              <input 
+                type="text" 
+                placeholder="Tìm kiếm bài viết..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full md:w-80 px-8 py-5 bg-gray-50 border border-gray-100 rounded-[24px] font-bold text-sm focus:outline-none focus:ring-4 focus:ring-blue-600/10 transition-all"
+              />
+              <svg className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+          </div>
         </div>
 
+        {categories.length > 1 && (
+          <div className="flex flex-wrap gap-3 mb-16">
+            {categories.map((cat: any) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                  activeCategory === cat 
+                    ? 'bg-gray-900 text-white shadow-2xl scale-105' 
+                    : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {articles?.map((article: Article, index: number) => (
+          {filteredArticles?.map((article: Article, index: number) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 40 }}
