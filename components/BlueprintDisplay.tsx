@@ -1,412 +1,469 @@
-
-
-import React from 'react';
-import { AppBlueprint, Field } from '../types';
+import React, { useState } from 'react';
 import { 
-  Terminal, 
   Layout, 
   Cpu, 
-  Shield, 
   Zap, 
-  GitBranch, 
+  Shield, 
+  Rocket, 
   Layers, 
-  Copy,
-  Smartphone,
-  Sparkles,
+  Eye, 
+  Lock, 
+  ChevronRight, 
+  CheckCircle2, 
+  Sparkles, 
+  Smartphone, 
+  Globe, 
+  Code2, 
+  Terminal,
+  Database,
+  Search,
+  Share2,
+  ExternalLink,
+  ArrowUpRight,
+  Lightbulb,
+  Target,
+  Trophy,
+  Workflow,
   Box,
-  Lock,
-  EyeOff,
-  FileCode
+  Mic2,
+  Image as ImageIcon,
+  Scan,
+  Wand2
 } from 'lucide-react';
+import { AppBlueprint, Field, Feature, DesignStyle } from '../types';
+import { motion, AnimatePresence } from 'motion/react';
+import { Badge } from './ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { ScrollArea } from './ui/scroll-area';
+import { VisualMockup } from './mockups/VisualMockup';
+import { DynamicRenderer } from './modules/DynamicRenderer';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import { toast } from 'sonner';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 
-interface Props {
-  data: AppBlueprint;
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
-const SectionTitle: React.FC<{ icon: React.ReactNode; title: string; color?: string }> = ({ icon, title, color = "text-amber-400" }) => (
-  <div className="flex items-center gap-3 mb-5 mt-8 border-b border-gray-800 pb-2">
-    <div className={`${color}`}>{icon}</div>
-    <h2 className={`text-lg md:text-xl font-bold font-mono tracking-widest ${color} uppercase`}>{title}</h2>
-  </div>
-);
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const GlassCard: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => (
-  <div className={`bg-gray-900/40 backdrop-blur-md border border-gray-700/50 rounded-xl p-6 shadow-xl hover:border-gray-600/50 transition-colors ${className}`}>
+  <motion.div 
+    variants={itemVariants}
+    className={`bg-slate-900/40 backdrop-blur-xl border border-slate-800/50 rounded-3xl overflow-hidden ${className}`}
+  >
     {children}
+  </motion.div>
+);
+
+const SectionTitle: React.FC<{ icon: React.ElementType; title: string; color?: string }> = ({ icon: Icon, title, color = "amber" }) => (
+  <div className="flex items-center gap-3 mb-6">
+    <div className={`p-2 bg-${color}-500/10 rounded-xl border border-${color}-500/20`}>
+      <Icon className={`text-${color}-500`} size={20} />
+    </div>
+    <h3 className="text-lg font-black tracking-tight uppercase text-white">{title}</h3>
   </div>
 );
 
 const FieldPreview: React.FC<{ field: Field }> = ({ field }) => (
-  <div className="mb-5 group">
-    <label className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase mb-2 tracking-wider">
-      {field.label} 
-      <span className="text-gray-600 font-mono text-[10px] bg-black/30 px-1 rounded">id: {field.id}</span> 
-      {field.required && <span className="text-amber-500 text-[10px] border border-amber-900/50 px-1 rounded bg-amber-900/20">BẮT BUỘC</span>}
-    </label>
-    
-    {field.type === 'select' || field.type === 'multiselect' ? (
-      <div className="relative">
-        <select disabled className="w-full bg-[#0F1629] border border-gray-700 rounded-lg p-3 text-sm text-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none appearance-none transition-all opacity-80 cursor-not-allowed">
-          <option>{field.placeholder || "Locked Selection..."}</option>
-          {field.options?.map((opt, i) => <option key={i}>{opt}</option>)}
-        </select>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-           <Lock size={12} />
-        </div>
-      </div>
-    ) : field.type === 'textarea' ? (
-      <textarea 
-        disabled
-        className="w-full bg-[#0F1629] border border-gray-700 rounded-lg p-3 text-sm text-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none min-h-[100px] transition-all resize-none opacity-80 cursor-not-allowed"
-        placeholder={field.placeholder + " (Read Only)"}
-      />
-    ) : (
-      <div className="relative">
-        <input 
-          disabled
-          type={field.type} 
-          className="w-full bg-[#0F1629] border border-gray-700 rounded-lg p-3 text-sm text-gray-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all opacity-80 cursor-not-allowed"
-          placeholder={field.placeholder}
-        />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-           <Lock size={12} />
-        </div>
-      </div>
-    )}
-    {field.example && <p className="text-[10px] text-gray-500 mt-1.5 italic pl-1 border-l-2 border-gray-700">Ví dụ: {field.example}</p>}
+  <div className="group relative p-4 bg-slate-950/50 border border-slate-800/50 rounded-2xl hover:border-amber-500/30 transition-all">
+    <div className="flex items-center justify-between mb-2">
+      <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">{field.id}</span>
+      {field.required && <Badge variant="outline" className="text-[8px] border-amber-500/30 text-amber-500 uppercase">Bắt buộc</Badge>}
+    </div>
+    <h4 className="text-sm font-bold text-slate-200 mb-1">{field.label}</h4>
+    <div className="flex items-center gap-2 text-[10px] text-slate-500 italic">
+      <div className="w-1 h-1 bg-amber-500 rounded-full"></div>
+      VD: {field.example}
+    </div>
+    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <Lock size={12} className="text-slate-600" />
+    </div>
   </div>
 );
 
-export const BlueprintDisplay: React.FC<Props> = ({ data }) => {
-  const [activeTab, setActiveTab] = React.useState<'overview' | 'engine'>('overview');
+export const BlueprintDisplay: React.FC<{ 
+  data: AppBlueprint; 
+  onRefine?: (feedback: string) => void;
+  isRefining?: boolean;
+}> = ({ data, onRefine, isRefining }) => {
+  const [feedback, setFeedback] = useState('');
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    // Could add toast here
+  const handleExportPDF = async () => {
+    const element = document.getElementById('blueprint-content');
+    if (!element) return;
+
+    toast.loading("Đang chuẩn bị hồ sơ PDF...");
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#020617'
+      });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${data?.summary?.app_name?.replace(/\s+/g, '_') || 'Blueprint'}_Blueprint.pdf`);
+      toast.success("Đã xuất hồ sơ PDF thành công!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Lỗi khi xuất PDF.");
+    }
   };
 
-  return (
-    <div className="w-full max-w-7xl mx-auto space-y-8 animate-fadeIn pb-24">
+  const handleExportCode = () => {
+    if (!data?.layout_modules || data.layout_modules.length === 0) {
+      toast.error("Không có module nào để xuất code.");
+      return;
+    }
+
+    let code = `import React from 'react';\n`;
+    
+    // Import statements based on used modules
+    const usedModules = Array.from(new Set(data.layout_modules.map(m => m.type)));
+    usedModules.forEach(moduleType => {
+      code += `import { ${moduleType} } from './components/modules/${moduleType}';\n`;
+    });
+
+    code += `\nexport default function GeneratedPage() {\n  return (\n    <div className="min-h-screen bg-[#020617] text-slate-200">\n`;
+
+    // Render modules
+    data.layout_modules.forEach((mod, index) => {
+      const propsString = Object.entries(mod.props || {})
+        .map(([key, value]) => {
+          if (typeof value === 'string') return `${key}="${value.replace(/"/g, '&quot;')}"`;
+          return `${key}={${JSON.stringify(value)}}`;
+        })
+        .join(' ');
       
-      {/* Header Summary - CENTERED AS REQUESTED */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 via-[#0a0f1e] to-black border border-amber-500/20 p-8 md:p-12 shadow-2xl shadow-amber-900/5">
-        <div className="absolute top-0 right-0 p-4 opacity-5 rotate-12 pointer-events-none">
-           <Smartphone size={200} />
-        </div>
-        <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full"></div>
+      code += `      <${mod.type} ${propsString} />\n`;
+    });
+
+    code += `    </div>\n  );\n}\n`;
+
+    // Create and download file
+    const blob = new Blob([code], { type: 'text/typescript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${data?.summary?.app_name?.replace(/\s+/g, '_') || 'Generated'}_Page.tsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast.success("Đã tải Source Code React thành công!");
+  };
+
+  if (!data || !data.summary) return null;
+
+  return (
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="max-w-[1400px] mx-auto px-6 pb-32 font-sans"
+      id="blueprint-content"
+    >
+      {/* --- HEADER --- */}
+      <motion.div variants={itemVariants} className="text-center mb-16 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none"></div>
         
-        {/* CENTERED LAYOUT CHANGE */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center gap-8">
-          
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {/* VIP BADGE */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-bold tracking-[0.3em] text-black bg-gradient-to-r from-amber-300 to-yellow-500 rounded-full font-mono uppercase shadow-[0_0_20px_rgba(245,158,11,0.4)] animate-pulse">
-              <Sparkles size={12} /> PHIÊN BẢN {data.summary.app_type === 'image' ? 'HÌNH ẢNH 8K' : 'NỘI DUNG AI'}
-            </div>
-
-            {/* MAIN TITLE - BIG & CENTERED */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-500 leading-tight drop-shadow-2xl">
-              {data.summary.app_name}
-            </h1>
-
-            {/* SLOGAN */}
-            <p className="text-xl md:text-3xl text-amber-200/90 italic font-light font-serif tracking-wide">
-              "{data.summary.app_slogan}"
-            </p>
-            
-            {/* DECORATIVE LINE */}
-            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto opacity-50"></div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 min-w-[200px]">
-             {/* Security Badge */}
-             <div className="bg-red-950/30 px-6 py-3 rounded-xl border border-red-500/30 backdrop-blur-sm flex items-center gap-3">
-               <div className="p-2 bg-red-500/10 rounded-full text-red-500 animate-pulse">
-                 <Lock size={16} />
-               </div>
-               <div className="text-left">
-                  <span className="block text-red-500/70 text-[8px] uppercase tracking-widest">TRẠNG THÁI BẢO MẬT</span>
-                  <span className="text-red-400 font-bold text-xs">ĐÃ KHÓA & MÃ HÓA</span>
-               </div>
-            </div>
-
-            <div className="bg-white/5 px-6 py-3 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-3">
-               <div className="p-2 bg-gray-700/50 rounded-full text-gray-300">
-                 <Box size={16} />
-               </div>
-               <div className="text-left">
-                  <span className="block text-gray-500 text-[10px] uppercase mb-1 tracking-wider">LĨNH VỰC</span>
-                  <span className="text-white font-medium text-xs uppercase">{data.summary.industry}</span>
-               </div>
-            </div>
-          </div>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full mb-6">
+          <Sparkles size={14} className="text-amber-500" />
+          <span className="text-[10px] font-black tracking-[0.2em] text-amber-500 uppercase">{data.summary.industry}</span>
         </div>
-      </div>
+        
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase mb-4 drop-shadow-2xl">
+          {data.summary.app_name}
+        </h1>
+        <p className="text-xl md:text-2xl font-medium text-slate-400 italic mb-8">
+          "{data.summary.app_slogan}"
+        </p>
 
-      {/* Tabs */}
-      <div className="flex justify-center gap-12 border-b border-gray-800 px-4">
-        <button 
-          onClick={() => setActiveTab('overview')}
-          className={`pb-4 text-sm font-bold uppercase tracking-widest transition-all relative ${activeTab === 'overview' ? 'text-amber-400' : 'text-gray-600 hover:text-gray-300'}`}
-        >
-          THIẾT KẾ & TÍNH NĂNG
-          {activeTab === 'overview' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 shadow-[0_0_10px_#fbbf24]"></div>}
-        </button>
-        <button 
-          onClick={() => setActiveTab('engine')}
-          className={`pb-4 text-sm font-bold uppercase tracking-widest transition-all relative ${activeTab === 'engine' ? 'text-cyan-400' : 'text-gray-600 hover:text-gray-300'}`}
-        >
-          LÕI HỆ THỐNG (ENGINE)
-          {activeTab === 'engine' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>}
-        </button>
-      </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Badge className="bg-slate-800 text-slate-300 hover:bg-slate-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+            <Layout size={12} className="mr-2" /> {data?.ui_design?.layout_style || 'Default Layout'}
+          </Badge>
+          <Badge className="bg-slate-800 text-slate-300 hover:bg-slate-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+            <Eye size={12} className="mr-2" /> {data?.ui_design?.visual_vibe || 'Default Vibe'}
+          </Badge>
+          <Badge className="bg-amber-500 text-black hover:bg-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+            <Zap size={12} className="mr-2" /> {data?.summary?.app_type === 'content' ? 'Content AI' : 'Image 8K'}
+          </Badge>
+        </div>
+      </motion.div>
 
-      {activeTab === 'overview' && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* Left Column: UI & Inputs */}
-          <div className="lg:col-span-5 space-y-6">
-            <GlassCard className="border-t-4 border-t-blue-500 h-full">
-              <div className="flex items-center gap-2 mb-6 text-blue-400">
-                <Layout size={20} />
-                <h3 className="font-bold uppercase tracking-widest text-sm">GIAO DIỆN (UI/UX)</h3>
-              </div>
-              <div className="space-y-6">
-                <div>
-                  <span className="text-gray-500 uppercase text-[10px] font-bold tracking-wider block mb-2">PHONG CÁCH LAYOUT</span>
-                  <span className="inline-block text-white bg-blue-900/30 px-3 py-1.5 rounded border border-blue-500/30 text-sm font-medium shadow-[0_0_10px_rgba(59,130,246,0.2)]">
-                    {data.ui_design.layout_style}
-                  </span>
+      {/* --- CONTENT TABS --- */}
+      <Tabs defaultValue="overview" className="w-full">
+        <div className="flex justify-center mb-12">
+          <TabsList className="bg-slate-900/50 border border-slate-800 p-1 rounded-2xl">
+            <TabsTrigger value="overview" className="rounded-xl px-8 py-2 data-[state=active]:bg-amber-500 data-[state=active]:text-black font-bold uppercase text-[10px] tracking-widest transition-all">
+              <Layers size={14} className="mr-2" /> TỔNG QUAN
+            </TabsTrigger>
+            <TabsTrigger value="mockup" className="rounded-xl px-8 py-2 data-[state=active]:bg-amber-500 data-[state=active]:text-black font-bold uppercase text-[10px] tracking-widest transition-all">
+              <Smartphone size={14} className="mr-2" /> MÔ PHỎNG UI
+            </TabsTrigger>
+            <TabsTrigger value="engine" className="rounded-xl px-8 py-2 data-[state=active]:bg-amber-500 data-[state=active]:text-black font-bold uppercase text-[10px] tracking-widest transition-all">
+              <Cpu size={14} className="mr-2" /> ENGINE HỆ THỐNG
+            </TabsTrigger>
+            <TabsTrigger value="builder" className="rounded-xl px-8 py-2 data-[state=active]:bg-amber-500 data-[state=active]:text-black font-bold uppercase text-[10px] tracking-widest transition-all">
+              <Box size={14} className="mr-2" /> LẮP RÁP CODE
+            </TabsTrigger>
+          </TabsList>
+        </div>
+
+        <TabsContent value="overview" className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* LEFT COLUMN: UI & INPUTS */}
+            <div className="lg:col-span-2 space-y-8">
+              <GlassCard className="p-8">
+                <SectionTitle icon={Layout} title="Cấu Trúc Giao Diện & Inputs" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Các Section Chính</h4>
+                      <div className="space-y-2">
+                        {data?.ui_design?.main_sections?.map((section, idx) => (
+                          <div key={idx} className="flex items-center gap-3 p-3 bg-slate-950/50 rounded-xl border border-slate-800/50">
+                            <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                            <span className="text-xs font-bold text-slate-300">{section}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-6">
+                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Trường Dữ Liệu (Fields)</h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {data?.fields?.map((field, idx) => (
+                        <FieldPreview key={idx} field={field} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-gray-500 uppercase text-[10px] font-bold tracking-wider block mb-2">VISUAL VIBE</span>
-                  <p className="italic text-gray-300 border-l-2 border-blue-500 pl-3 py-1 bg-gradient-to-r from-blue-900/10 to-transparent">
-                    {data.ui_design.visual_style}
-                  </p>
-                </div>
-                <div className="pt-2">
-                  <span className="text-gray-500 uppercase text-[10px] font-bold tracking-wider block mb-3">CÁC PHẦN CHÍNH (SECTIONS)</span>
-                  <div className="space-y-2">
-                    {data.ui_design.main_sections.map((sec, idx) => (
-                      <div key={idx} className="flex items-center gap-3 text-sm text-gray-300 bg-black/20 p-2 rounded border border-gray-800/50">
-                        <div className="w-6 h-6 rounded flex items-center justify-center bg-blue-500/20 text-blue-400 text-xs font-bold font-mono">
-                          {idx + 1}
-                        </div>
-                        {sec}
+              </GlassCard>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <GlassCard className="p-8">
+                  <SectionTitle icon={Target} title="Ý Tưởng & Use Cases" color="blue" />
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Marketing Hooks</h4>
+                      <div className="space-y-3">
+                        {data?.ideas_use_cases?.marketing_hooks?.map((hook, idx) => (
+                          <div key={idx} className="p-4 bg-blue-500/5 border border-blue-500/10 rounded-2xl">
+                            <p className="text-xs font-medium text-blue-200 italic">"{hook}"</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                <GlassCard className="p-8">
+                  <SectionTitle icon={Trophy} title="Real-World Apps" color="green" />
+                  <div className="space-y-3">
+                    {data?.ideas_use_cases?.real_world_applications?.map((app, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-4 bg-green-500/5 border border-green-500/10 rounded-2xl group cursor-default">
+                        <span className="text-xs font-bold text-green-200">{app}</span>
+                        <ArrowUpRight size={14} className="text-green-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                     ))}
                   </div>
-                </div>
+                </GlassCard>
               </div>
-            </GlassCard>
-
-            <GlassCard className="border-t-4 border-t-green-500">
-              <div className="flex items-center justify-between mb-6 text-green-400">
-                <div className="flex items-center gap-2">
-                   <Box size={20} />
-                   <h3 className="font-bold uppercase tracking-widest text-sm">TRƯỜNG DỮ LIỆU (FIELDS)</h3>
-                </div>
-                <div className="flex items-center gap-1 text-[10px] text-green-600 bg-green-900/10 px-2 py-1 rounded border border-green-900/30">
-                   <Lock size={10} /> CHỈ ĐỌC
-                </div>
-              </div>
-              <div className="bg-[#050912] rounded-xl p-4 border border-gray-800 max-h-[600px] overflow-y-auto custom-scrollbar shadow-inner">
-                {data.fields.map((field) => (
-                  <FieldPreview key={field.id} field={field} />
-                ))}
-              </div>
-            </GlassCard>
-          </div>
-
-          {/* Right Column: Features, Security, Expansion */}
-          <div className="lg:col-span-7 space-y-6">
-            
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <GlassCard className="bg-gray-800/20">
-                <h4 className="text-gray-400 text-[10px] font-bold uppercase mb-4 flex items-center gap-2 tracking-wider">
-                  <Layers size={14} /> CƠ BẢN (ESSENTIAL)
-                </h4>
-                <ul className="space-y-3">
-                  {data.features.essential.map((f, i) => (
-                    <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-gray-500 mt-2"></span> {f}
-                    </li>
-                  ))}
-                </ul>
-              </GlassCard>
-              <GlassCard className="bg-blue-900/10 border-blue-500/20">
-                <h4 className="text-blue-400 text-[10px] font-bold uppercase mb-4 flex items-center gap-2 tracking-wider">
-                  <Zap size={14} /> NÂNG CAO (PRO)
-                </h4>
-                <ul className="space-y-3">
-                  {data.features.pro.map((f, i) => (
-                    <li key={i} className="text-sm text-blue-100 flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-blue-500 mt-2"></span> {f}
-                    </li>
-                  ))}
-                </ul>
-              </GlassCard>
-              <GlassCard className="bg-amber-900/10 border-amber-500/30 relative overflow-hidden group">
-                <div className="absolute -right-10 -top-10 w-32 h-32 bg-amber-500 blur-[60px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <h4 className="text-amber-400 text-[10px] font-bold uppercase mb-4 flex items-center gap-2 tracking-wider relative z-10">
-                  <Cpu size={14} /> GOD MODE (AI)
-                </h4>
-                <ul className="space-y-3 relative z-10">
-                  {data.features.god_mode.map((f, i) => (
-                    <li key={i} className="text-sm text-amber-100 flex items-start gap-2">
-                       <span className="w-1 h-1 rounded-full bg-amber-500 mt-2 shadow-[0_0_5px_#fbbf24]"></span> {f}
-                    </li>
-                  ))}
-                </ul>
-              </GlassCard>
             </div>
 
-            {/* Ideas & Use Cases */}
-            <GlassCard>
-              <SectionTitle icon={<GitBranch size={20} />} title="CONCEPT & ỨNG DỤNG" color="text-purple-400" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div>
-                    <h5 className="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-wider">TIÊU ĐỀ MARKETING (HOOK)</h5>
+            {/* RIGHT COLUMN: FEATURES & ECOSYSTEM */}
+            <div className="space-y-8">
+              <GlassCard className="p-8">
+                <SectionTitle icon={Zap} title="Tính Năng Đột Phá" color="amber" />
+                <div className="space-y-6">
+                  {['essential', 'pro', 'god_mode'].map((tier) => (
+                    <div key={tier}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <Badge className={`text-[8px] uppercase tracking-widest ${
+                          tier === 'god_mode' ? 'bg-amber-500 text-black' : 
+                          tier === 'pro' ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                        }`}>
+                          {tier.replace('_', ' ')}
+                        </Badge>
+                      </div>
+                      <div className="space-y-2">
+                        {data?.features?.[tier as keyof typeof data.features]?.map((feature: Feature, idx: number) => (
+                          <div key={idx} className="p-3 bg-slate-950/50 border border-slate-800/50 rounded-xl">
+                            <h5 className="text-xs font-black text-slate-200 mb-1">{feature.name}</h5>
+                            <p className="text-[10px] text-slate-500 leading-relaxed">{feature.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-8">
+                <SectionTitle icon={Globe} title="Hệ Sinh Thái" color="purple" />
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Nâng Cấp Tương Lai</h4>
                     <div className="flex flex-wrap gap-2">
-                      {data.idea_titles.map((t, i) => (
-                        <span key={i} className="px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-500/5 text-xs text-purple-200 hover:bg-purple-500/20 transition-colors">
-                          {t}
-                        </span>
+                      {data?.ecosystem?.upgrade_ideas?.map((idea, idx) => (
+                        <Badge key={idx} variant="secondary" className="bg-purple-500/10 text-purple-400 border-purple-500/20 text-[9px] uppercase">
+                          {idea}
+                        </Badge>
                       ))}
                     </div>
-                 </div>
-                 <div>
-                    <h5 className="text-[10px] font-bold text-gray-500 uppercase mb-3 tracking-wider">TÌNH HUỐNG THỰC TẾ</h5>
-                    <ul className="space-y-3">
-                       {data.use_cases.map((u, i) => (
-                         <li key={i} className="text-sm text-gray-300 flex gap-3 border-b border-gray-800/50 pb-2 last:border-0 last:pb-0">
-                           <span className="text-purple-500 font-bold">→</span> {u}
-                         </li>
-                       ))}
-                    </ul>
-                 </div>
-              </div>
-            </GlassCard>
-
-             {/* Ecosystem */}
-            <GlassCard className="bg-gradient-to-br from-pink-900/10 to-transparent border-pink-500/20">
-               <SectionTitle icon={<Layers size={20} />} title="HỆ SINH THÁI ĐA VŨ TRỤ" color="text-pink-400" />
-               <div className="space-y-6">
+                  </div>
                   <div>
-                    <span className="text-[10px] font-bold text-pink-400/70 uppercase tracking-widest block mb-3">Ý TƯỞNG NÂNG CẤP (UPGRADE)</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {data.upgrades.map((item, i) => (
-                        <div key={i} className="p-3 bg-gray-900/50 rounded-lg text-sm text-gray-300 border border-gray-700/50 flex items-center gap-3 hover:border-pink-500/50 transition-colors">
-                           <div className="w-1.5 h-1.5 rounded-full bg-pink-500 shadow-[0_0_5px_#ec4899]"></div> {item}
+                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">App Liên Quan</h4>
+                    <div className="space-y-2">
+                      {data?.ecosystem?.related_apps?.map((app, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-400">
+                          <div className="w-1 h-1 bg-purple-500 rounded-full"></div>
+                          {app}
                         </div>
                       ))}
                     </div>
                   </div>
-                   <div>
-                    <span className="text-[10px] font-bold text-pink-400/70 uppercase tracking-widest block mb-3">APP CON LIÊN QUAN (CLONES)</span>
-                    <div className="flex flex-wrap gap-2">
-                      {data.related_apps.map((item, i) => (
-                        <span key={i} className="px-4 py-2 bg-black/40 text-gray-300 text-xs font-mono border border-gray-700 rounded-full hover:border-pink-500 hover:text-white cursor-default transition-all">
-                          {item}
-                        </span>
+                </div>
+              </GlassCard>
+            </div>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="mockup" className="space-y-8">
+          <VisualMockup data={data} />
+        </TabsContent>
+
+        <TabsContent value="engine" className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <GlassCard className="p-8">
+              <SectionTitle icon={Terminal} title="System Prompt Engine" color="red" />
+              <div className="relative group">
+                <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center rounded-2xl border border-red-500/20 opacity-100 group-hover:opacity-90 transition-opacity">
+                  <Lock size={32} className="text-red-500 mb-4 animate-pulse" />
+                  <p className="text-xs font-black text-red-500 tracking-widest uppercase">Bản quyền Nguyễn Nhật Linh</p>
+                  <p className="text-[10px] text-slate-500 mt-2">Nội dung đã được mã hóa bảo mật</p>
+                </div>
+                <pre className="p-6 bg-black rounded-2xl font-mono text-[10px] text-slate-700 leading-relaxed overflow-hidden h-[400px]">
+                  {data?.engine?.system_prompt || 'No system prompt available'}
+                </pre>
+              </div>
+            </GlassCard>
+
+            <div className="space-y-8">
+              <GlassCard className="p-8">
+                <SectionTitle icon={Code2} title="User Prompt Template" color="blue" />
+                <div className="p-6 bg-slate-950/50 border border-slate-800 rounded-2xl">
+                  <pre className="font-mono text-[10px] text-blue-400/80 leading-relaxed whitespace-pre-wrap">
+                    {data?.engine?.user_prompt_template || 'No user prompt template available'}
+                  </pre>
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-8">
+                <SectionTitle icon={Shield} title="Security & Logic" color="green" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Bảo Mật Hệ Thống</h4>
+                    <div className="space-y-2">
+                      {data?.security?.security_measures?.map((measure, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-[10px] font-bold text-slate-400">
+                          <CheckCircle2 size={12} className="text-green-500 mt-0.5 shrink-0" />
+                          {measure}
+                        </div>
                       ))}
                     </div>
                   </div>
-               </div>
-            </GlassCard>
+                  <div>
+                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Logic Xử Lý</h4>
+                    <div className="space-y-2">
+                      {data?.security?.logic_constraints?.map((logic, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-[10px] font-bold text-slate-400">
+                          <Workflow size={12} className="text-blue-500 mt-0.5 shrink-0" />
+                          {logic}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="builder" className="space-y-8">
+          <GlassCard className="p-8">
+            <SectionTitle icon={Box} title="Lắp Ráp Code Động" color="amber" />
+            <DynamicRenderer modules={data?.layout_modules} primaryColor={data?.ui_design?.primary_color} />
+          </GlassCard>
+        </TabsContent>
+      </Tabs>
+
+      {/* --- ACTION DOCK --- */}
+      <motion.div 
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-6"
+      >
+        <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-slate-900/90 backdrop-blur-2xl border border-slate-700/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          <div className="flex-1 flex items-center gap-3 w-full">
+            <div className="p-2 bg-amber-500/10 rounded-lg">
+              <Wand2 size={18} className="text-amber-500" />
+            </div>
+            <Input 
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Yêu cầu chỉnh sửa bản vẽ này..."
+              className="bg-slate-950/50 border-slate-800 focus:border-amber-500 h-12 rounded-xl text-xs"
+              onKeyDown={(e) => e.key === 'Enter' && onRefine && onRefine(feedback)}
+            />
+            <Button 
+              disabled={!feedback || isRefining}
+              onClick={() => onRefine && onRefine(feedback)}
+              className="bg-amber-500 hover:bg-amber-400 text-black font-black uppercase text-[10px] tracking-widest px-6 h-12 rounded-xl transition-all"
+            >
+              {isRefining ? 'ĐANG TINH CHỈNH...' : 'TINH CHỈNH'}
+            </Button>
+          </div>
+
+          <div className="hidden md:block h-8 w-[1px] bg-slate-700"></div>
+
+          <div className="flex items-center gap-2">
+            <Button 
+              onClick={handleExportCode}
+              variant="outline"
+              className="border-slate-700 hover:border-amber-500 text-slate-400 hover:text-amber-500 rounded-xl px-6 h-12 text-[10px] font-black uppercase tracking-widest"
+            >
+              <Code2 size={16} className="mr-2" /> TẢI CODE
+            </Button>
+            <Button 
+              onClick={handleExportPDF}
+              variant="outline"
+              className="border-slate-700 hover:border-amber-500 text-slate-400 hover:text-amber-500 rounded-xl px-6 h-12 text-[10px] font-black uppercase tracking-widest"
+            >
+              <Share2 size={16} className="mr-2" /> XUẤT PDF
+            </Button>
           </div>
         </div>
-      )}
-
-      {activeTab === 'engine' && (
-        <div className="space-y-6 animate-fadeIn">
-          
-          {/* VISUAL LOCK WARNING */}
-          <div className="bg-red-950/20 border border-red-500/30 rounded-xl p-4 flex items-center gap-4 justify-center text-red-400">
-             <Shield size={20} className="animate-pulse" />
-             <span className="text-xs font-bold uppercase tracking-widest">MÃ NGUỒN ĐÃ KHÓA • VÔ HIỆU HÓA CHỈNH SỬA • CHỈ DÀNH CHO ADMIN</span>
-          </div>
-
-          <GlassCard className="border-cyan-500/30 bg-cyan-950/5 relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3 text-cyan-400">
-                <Cpu size={24} />
-                <div>
-                   <h3 className="text-xl font-bold font-mono tracking-widest flex items-center gap-2">
-                     SYSTEM PROMPT <Lock size={14} className="text-red-500" />
-                   </h3>
-                   <p className="text-[10px] text-cyan-400/60 uppercase">LOGIC LÕI ĐƯỢC BẢO VỆ</p>
-                </div>
-              </div>
-              
-              {/* REMOVED COPY BUTTON FOR SECURITY */}
-              <div className="px-3 py-1.5 rounded-lg border border-red-500/30 bg-red-900/10 text-red-400 text-xs uppercase font-bold flex items-center gap-2 cursor-not-allowed opacity-70">
-                 <EyeOff size={14} /> ẨN NỘI DUNG
-              </div>
-            </div>
-            
-            <div className="relative group">
-               <div className="absolute -inset-0.5 bg-cyan-500/10 rounded-lg blur opacity-10"></div>
-               {/* OBFUSCATED / READ ONLY DISPLAY */}
-               <div className="relative bg-[#050912] p-6 rounded-lg border border-cyan-900/50 shadow-inner overflow-hidden">
-                  <div className="absolute top-0 right-0 p-2 text-cyan-900 opacity-20 pointer-events-none font-black text-6xl">LOCKED</div>
-                  <pre className="text-cyan-100/70 font-mono text-sm whitespace-pre-wrap leading-relaxed blur-[0.5px] select-none pointer-events-none">
-                    {data.engine.system_prompt}
-                  </pre>
-               </div>
-            </div>
-          </GlassCard>
-
-          <GlassCard className="border-purple-500/30 bg-purple-950/5">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3 text-purple-400">
-                <Terminal size={24} />
-                 <div>
-                   <h3 className="text-xl font-bold font-mono tracking-widest flex items-center gap-2">
-                     USER TEMPLATE <Lock size={14} className="text-red-500" />
-                   </h3>
-                   <p className="text-[10px] text-purple-400/60 uppercase">CẤU TRÚC CHỈ ĐỌC</p>
-                </div>
-              </div>
-              <div className="px-3 py-1.5 rounded-lg border border-gray-700 bg-gray-900/50 text-gray-500 text-xs uppercase font-bold flex items-center gap-2 cursor-not-allowed">
-                 <FileCode size={14} /> CHỈ ĐỌC
-              </div>
-            </div>
-            <pre className="bg-[#050912] p-6 rounded-lg overflow-x-auto border border-purple-900/50 text-purple-100/80 font-mono text-sm whitespace-pre-wrap leading-relaxed shadow-inner select-none">
-              {data.engine.user_prompt_template}
-            </pre>
-          </GlassCard>
-
-           <GlassCard className="border-green-500/30 bg-green-950/5">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3 text-green-400">
-                <Shield size={24} />
-                <h3 className="text-xl font-bold font-mono tracking-widest">LOGIC & BẢO MẬT</h3>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                 <h4 className="text-xs font-bold text-green-500 uppercase mb-3 tracking-widest border-b border-green-500/20 pb-1 inline-block">Logic Vòng Lặp (Loop)</h4>
-                 <div className="bg-black/40 p-5 rounded-lg border border-green-900/30 text-gray-300 text-sm leading-relaxed">
-                   {data.engine.loop_logic}
-                 </div>
-              </div>
-              <div>
-                 <h4 className="text-xs font-bold text-green-500 uppercase mb-3 tracking-widest border-b border-green-500/20 pb-1 inline-block">Quy tắc Bảo mật</h4>
-                 <ul className="space-y-2 bg-black/40 p-5 rounded-lg border border-green-900/30 text-gray-300 text-sm">
-                   {data.security.security_rules.map((r, i) => (
-                     <li key={i} className="flex gap-2">
-                       <span className="text-green-500">•</span> {r}
-                     </li>
-                   ))}
-                 </ul>
-              </div>
-            </div>
-          </GlassCard>
-        </div>
-      )}
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "Blueprint": {
+      "title": "Blueprint",
+      "description": "A generated application architecture blueprint.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the user who generated this blueprint."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the blueprint was created."
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "app_name": { "type": "string" },
+            "app_slogan": { "type": "string" },
+            "app_type": { "type": "string" },
+            "industry": { "type": "string" },
+            "target_user": { "type": "string" },
+            "main_goal": { "type": "string" }
+          }
+        },
+        "ui_design": {
+          "type": "object",
+          "properties": {
+            "layout_style": { "type": "string" },
+            "main_sections": { "type": "array", "items": { "type": "string" } },
+            "visual_vibe": { "type": "string" }
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "type": { "type": "string" },
+              "required": { "type": "boolean" },
+              "placeholder": { "type": "string" },
+              "example": { "type": "string" }
+            }
+          }
+        },
+        "features": {
+          "type": "object",
+          "properties": {
+            "essential": { "type": "array", "items": { "$ref": "Feature" } },
+            "pro": { "type": "array", "items": { "$ref": "Feature" } },
+            "god_mode": { "type": "array", "items": { "$ref": "Feature" } }
+          }
+        },
+        "engine": {
+          "type": "object",
+          "properties": {
+            "system_prompt": { "type": "string" },
+            "user_prompt_template": { "type": "string" }
+          }
+        },
+        "security": {
+          "type": "object",
+          "properties": {
+            "security_measures": { "type": "array", "items": { "type": "string" } },
+            "logic_constraints": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "ideas_use_cases": {
+          "type": "object",
+          "properties": {
+            "marketing_hooks": { "type": "array", "items": { "type": "string" } },
+            "real_world_applications": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "ecosystem": {
+          "type": "object",
+          "properties": {
+            "upgrade_ideas": { "type": "array", "items": { "type": "string" } },
+            "related_apps": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      },
+      "required": ["userId", "createdAt", "summary"]
+    },
+    "Feature": {
+      "title": "Feature",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/blueprints/{blueprintId}": {
+      "schema": "Blueprint",
+      "description": "Collection of generated blueprints."
+    }
+  }
+}

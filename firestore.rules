@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: blueprints
+    // Document ID: auto-generated
+    // Fields:
+    //   - userId: string (required) - UID of the owner
+    //   - createdAt: timestamp (required) - Creation time
+    //   - summary: map (required) - App summary
+    //   - ui_design: map (optional) - UI design details
+    //   - fields: list (optional) - Input fields
+    //   - features: map (optional) - Feature tiers
+    //   - engine: map (optional) - AI engine prompts
+    //   - security: map (optional) - Security measures
+    //   - ideas_use_cases: map (optional) - Marketing/Use cases
+    //   - ecosystem: map (optional) - Upgrades/Related apps
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.userId;
+    }
+
+    function uidUnchanged() {
+      return !('userId' in request.resource.data) || request.resource.data.userId == request.auth.uid;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function isValidBlueprint(data) {
+      return data.userId is string &&
+             data.createdAt is timestamp &&
+             data.summary is map &&
+             data.summary.app_name is string &&
+             data.summary.app_name.size() > 0 &&
+             data.summary.app_name.size() < 200;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /blueprints/{blueprintId} {
+      allow read: if isAuthenticated() && isDocOwner();
+      allow create: if isAuthenticated() && 
+                      isValidBlueprint(request.resource.data) && 
+                      isOwner(request.resource.data.userId);
+      allow update: if false; // Blueprints are immutable for now
+      allow delete: if isAuthenticated() && isDocOwner();
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
