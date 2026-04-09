@@ -98,6 +98,24 @@ import { CertificateShowcase } from './CertificateShowcase';
 import { LiveChatPreview } from './LiveChatPreview';
 import { LeadMagnet } from './LeadMagnet';
 import { PropertySearch } from './PropertySearch';
+import { FeatureTabs } from './FeatureTabs';
+import { TestimonialCarousel } from './TestimonialCarousel';
+import { PartnerGrid } from './PartnerGrid';
+import { FAQSearch } from './FAQSearch';
+import { StickyCTA } from './StickyCTA';
+import { UserStatsDashboard } from './UserStatsDashboard';
+import { FeatureComparisonTable } from './FeatureComparisonTable';
+import { FlashSaleBanner } from './FlashSaleBanner';
+import { LearningPathMap } from './LearningPathMap';
+import { DonationImpactCards } from './DonationImpactCards';
+import { VirtualTourGallery } from './VirtualTourGallery';
+import { CareerPathTimeline } from './CareerPathTimeline';
+import { RecipeCardGrid } from './RecipeCardGrid';
+import { WorkoutPlanTable } from './WorkoutPlanTable';
+import { LegalServiceCard } from './LegalServiceCard';
+import { CarFeatureHighlight } from './CarFeatureHighlight';
+import { PetProfileCard } from './PetProfileCard';
+import { FinancialCalculatorPreview } from './FinancialCalculatorPreview';
 
 const moduleMap: Record<string, React.FC<any>> = {
   HeroSection: HeroSection,
@@ -159,6 +177,24 @@ const moduleMap: Record<string, React.FC<any>> = {
   LiveChatPreview: LiveChatPreview,
   LeadMagnet: LeadMagnet,
   PropertySearch: PropertySearch,
+  FeatureTabs: FeatureTabs,
+  TestimonialCarousel: TestimonialCarousel,
+  PartnerGrid: PartnerGrid,
+  FAQSearch: FAQSearch,
+  StickyCTA: StickyCTA,
+  UserStatsDashboard: UserStatsDashboard,
+  FeatureComparisonTable: FeatureComparisonTable,
+  FlashSaleBanner: FlashSaleBanner,
+  LearningPathMap: LearningPathMap,
+  DonationImpactCards: DonationImpactCards,
+  VirtualTourGallery: VirtualTourGallery,
+  CareerPathTimeline: CareerPathTimeline,
+  RecipeCardGrid: RecipeCardGrid,
+  WorkoutPlanTable: WorkoutPlanTable,
+  LegalServiceCard: LegalServiceCard,
+  CarFeatureHighlight: CarFeatureHighlight,
+  PetProfileCard: PetProfileCard,
+  FinancialCalculatorPreview: FinancialCalculatorPreview,
   SaasLayout: SaasLayout,
   PortfolioLayout: PortfolioLayout,
   AppPromoLayout: AppPromoLayout,

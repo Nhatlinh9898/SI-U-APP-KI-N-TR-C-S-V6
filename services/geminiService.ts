@@ -66,44 +66,44 @@ export const generateBlueprint = async (
                          template === 'financial' ? 'FinancialLayout' :
                          template === 'logistics' ? 'LogisticsLayout' : 'BakeryLayout';
                          
-      const requiredProps = template === 'saas' ? 'hero, logos, products, metrics, integrations, tech_stack, pricing_matrix, roadmap, live_chat, video_testimonials, faq, articles, cta, footer' : 
-                            template === 'portfolio' ? 'hero, logos, skill_cloud, tech_stack, projects, timeline, certificates, social_feed, reviews, contact, footer' : 
-                            template === 'app_promo' ? 'hero, video, products, metrics, integrations, tech_stack, app_download, faq, cta, footer' :
-                            template === 'ecommerce' ? 'hero, logos, comparison, products, bento, trust_badges, reviews, app_download, newsletter, footer' :
-                            template === 'event' ? 'hero, countdown, video, itinerary, schedule, team, pricing, map, faq, footer' :
-                            template === 'creator' ? 'profile, video, links, metrics, social_feed, articles, lead_magnet, newsletter, footer' :
-                            template === 'course' ? 'hero, video_playlist, metrics, instructor, curriculum, certificates, features, pricing, faq, footer' :
-                            template === 'restaurant' ? 'hero, gallery, menu_tabs, menu_grid, highlights, reviews, opening_hours, map, booking, footer' :
-                            template === 'real_estate' ? 'hero, search, properties, metrics, features, reviews, map, booking, footer' :
-                            template === 'agency' ? 'hero, logos, skill_cloud, tech_stack, bento, process, team, jobs, video_testimonials, cta, footer' :
-                            template === 'travel' ? 'hero, gallery, itinerary, features, reviews, map, booking, footer' :
-                            template === 'clinic' ? 'hero, metrics, services, doctors, trust_badges, opening_hours, faq, map, booking, footer' :
-                            template === 'fitness' ? 'hero, metrics, classes, schedule, memberships, app_download, booking, footer' :
-                            template === 'charity' ? 'hero, fundraising, impact_map, metrics, programs, stories, donate, footer' :
-                            template === 'local_service' ? 'hero, services, process, reviews, opening_hours, map, faq, booking, footer' :
-                            template === 'lawyer' ? 'hero, metrics, practices, process, trust_badges, faq, map, booking, footer' :
-                            template === 'interior_design' ? 'hero, projects, before_after, portfolio, process, reviews, booking, footer' :
-                            template === 'photography' ? 'hero, projects, packages, social_feed, reviews, booking, footer' :
+      const requiredProps = template === 'saas' ? 'hero, logos, products, metrics, feature_tabs, integrations, tech_stack, feature_comparison, roadmap, live_chat, video_testimonials, faq_search, articles, cta, footer, sticky_cta' : 
+                            template === 'portfolio' ? 'hero, logos, skill_cloud, tech_stack, projects, timeline, certificates, social_feed, testimonial_carousel, career_path, contact, footer' : 
+                            template === 'app_promo' ? 'hero, video, products, metrics, feature_tabs, integrations, tech_stack, app_download, faq_search, cta, footer' :
+                            template === 'ecommerce' ? 'flash_sale, hero, logos, comparison, products, bento, trust_badges, testimonial_carousel, app_download, newsletter, footer, sticky_cta' :
+                            template === 'event' ? 'hero, countdown, video, itinerary, schedule, team, pricing, map, faq_search, footer' :
+                            template === 'creator' ? 'profile, video, stats_dashboard, links, metrics, social_feed, articles, lead_magnet, newsletter, footer' :
+                            template === 'course' ? 'hero, video_playlist, metrics, instructor, learning_path, curriculum, certificates, features, pricing, faq_search, footer' :
+                            template === 'restaurant' ? 'hero, gallery, menu_tabs, menu_grid, recipes, highlights, testimonial_carousel, opening_hours, map, booking, footer' :
+                            template === 'real_estate' ? 'hero, search, virtual_tour, properties, metrics, features, testimonial_carousel, map, booking, footer' :
+                            template === 'agency' ? 'hero, logos, skill_cloud, tech_stack, partners, bento, process, team, career_path, jobs, video_testimonials, cta, footer' :
+                            template === 'travel' ? 'hero, gallery, itinerary, features, testimonial_carousel, map, booking, footer' :
+                            template === 'clinic' ? 'hero, metrics, services, doctors, trust_badges, opening_hours, faq_search, map, booking, footer' :
+                            template === 'fitness' ? 'hero, metrics, workouts, classes, schedule, memberships, app_download, booking, footer' :
+                            template === 'charity' ? 'hero, fundraising, impact_map, donation_impact, metrics, programs, stories, donate, footer' :
+                            template === 'local_service' ? 'hero, services, process, testimonial_carousel, opening_hours, map, faq_search, booking, footer' :
+                            template === 'lawyer' ? 'hero, metrics, legal_services, practices, process, trust_badges, faq_search, map, booking, footer' :
+                            template === 'interior_design' ? 'hero, projects, before_after, portfolio, process, testimonial_carousel, booking, footer' :
+                            template === 'photography' ? 'hero, projects, packages, social_feed, testimonial_carousel, booking, footer' :
                             template === 'podcast' ? 'hero, audio, video_playlist, instructor, social_feed, episodes, newsletter, footer' :
                             template === 'wedding' ? 'hero, countdown, gallery, schedule, social_feed, booking, footer' :
-                            template === 'book_launch' ? 'hero, countdown, video, instructor, metrics, chapters, social_feed, reviews, pricing, footer' :
+                            template === 'book_launch' ? 'hero, countdown, video, instructor, metrics, chapters, social_feed, testimonial_carousel, pricing, footer' :
                             template === 'music_release' ? 'hero, audio, video, social_feed, gallery, listen_now, footer' :
                             template === 'gaming_guild' ? 'hero, video, leaderboard, social_feed, roster, highlights, join_us, footer' :
-                            template === 'car_rental' ? 'hero, products, process, faq, booking, footer' :
-                            template === 'pet_care' ? 'hero, menu_tabs, menu_grid, services, reviews, booking, footer' :
+                            template === 'car_rental' ? 'hero, car_features, products, process, faq_search, booking, footer' :
+                            template === 'pet_care' ? 'hero, pet_profiles, menu_tabs, menu_grid, services, testimonial_carousel, booking, footer' :
                             template === 'crypto_project' ? 'hero, stock_ticker, countdown, tokenomics, metrics, process, roadmap, team, community, footer' :
-                            template === 'spa' ? 'hero, menu_tabs, menu_grid, before_after, reviews, opening_hours, booking, footer' :
+                            template === 'spa' ? 'hero, menu_tabs, menu_grid, before_after, testimonial_carousel, opening_hours, booking, footer' :
                             template === 'recruitment' ? 'hero, metrics, benefits, process, jobs, apply, footer' :
                             template === 'crowdfunding' ? 'hero, fundraising, metrics, story, process, rewards, back_us, footer' :
-                            template === 'coaching' ? 'hero, instructor, metrics, process, programs, reviews, booking, footer' :
+                            template === 'coaching' ? 'hero, instructor, metrics, process, programs, testimonial_carousel, booking, footer' :
                             template === 'coworking' ? 'hero, amenities, gallery, plans, process, booking, footer' :
-                            template === 'auto_repair' ? 'hero, services, before_after, process, reviews, map, booking, footer' :
-                            template === 'education' ? 'hero, metrics, programs, curriculum, certificates, reviews, map, booking, footer' :
+                            template === 'auto_repair' ? 'hero, services, before_after, process, testimonial_carousel, map, booking, footer' :
+                            template === 'education' ? 'hero, metrics, programs, learning_path, curriculum, certificates, testimonial_carousel, map, booking, footer' :
                             template === 'cleaning_service' ? 'hero, services, before_after, process, pricing, booking, footer' :
                             template === 'architecture' ? 'hero, projects, metrics, process, booking, footer' :
-                            template === 'financial' ? 'hero, stock_ticker, metrics, process, trust_badges, faq, booking, footer' :
-                            template === 'logistics' ? 'hero, impact_map, metrics, process, reviews, booking, footer' :
-                            'hero, menu_tabs, menu_grid, features, reviews, order, footer';
+                            template === 'financial' ? 'hero, stock_ticker, calculator_preview, metrics, process, trust_badges, faq_search, booking, footer' :
+                            template === 'logistics' ? 'hero, impact_map, metrics, process, testimonial_carousel, booking, footer' :
+                            'hero, menu_tabs, menu_grid, features, testimonial_carousel, order, footer';
                             
       prompt += `\n🔥 YÊU CẦU ĐẶC BIỆT VỀ LAYOUT (BẮT BUỘC TUÂN THỦ 100%):\n`;
       prompt += `- Người dùng đã chọn layout mẫu: ${PREDEFINED_LAYOUTS[template].name}.\n`;
@@ -166,6 +166,24 @@ export const generateBlueprint = async (
     prompt += `  + LiveChatPreview: { title, subtitle, messages: [{user, text, time, isBot}] } (Mô phỏng khung chat trực tuyến)\n`;
     prompt += `  + LeadMagnet: { title, subtitle, description, buttonText, image } (Kêu gọi đăng ký nhận quà/ebook)\n`;
     prompt += `  + PropertySearch: { title, subtitle } (Thanh tìm kiếm BĐS chuyên sâu)\n`;
+    prompt += `  + FeatureTabs: { title, subtitle, tabs: [{title, description, image, icon}] } (Tính năng chia tab dọc hiện đại)\n`;
+    prompt += `  + TestimonialCarousel: { title, testimonials: [{name, role, content, avatar}] } (Trình trượt đánh giá khách hàng)\n`;
+    prompt += `  + PartnerGrid: { title, subtitle, partners: [{name, logo, description}] } (Lưới đối tác kèm mô tả chi tiết)\n`;
+    prompt += `  + FAQSearch: { title, subtitle, faqs: [{question, answer, category}] } (Hỏi đáp có thanh tìm kiếm và lọc category)\n`;
+    prompt += `  + StickyCTA: { text, buttonText } (Nút kêu gọi hành động nổi cố định ở dưới)\n`;
+    prompt += `  + UserStatsDashboard: { title, subtitle, stats: [{label, value, icon, color}] } (Bảng chỉ số người dùng chuyên nghiệp)\n`;
+    prompt += `  + FeatureComparisonTable: { title, subtitle, plans: [{name, price, features: {featureName: boolean|string}}], featureList: [string] } (Bảng so sánh tính năng chi tiết giữa các gói)\n`;
+    prompt += `  + FlashSaleBanner: { title, endTime, buttonText } (Thanh đếm ngược khuyến mãi khẩn cấp ở đầu trang)\n`;
+    prompt += `  + LearningPathMap: { title, subtitle, steps: [{title, description, icon, isCompleted}] } (Bản đồ lộ trình học tập trực quan)\n`;
+    prompt += `  + DonationImpactCards: { title, subtitle, tiers: [{amount, title, description, image}] } (Thẻ tác động quyên góp - ví dụ: 50$ giúp được gì)\n`;
+    prompt += `  + VirtualTourGallery: { title, subtitle, images: [{url, label}] } (Bộ sưu tập ảnh tối ưu cho tour ảo/360)\n`;
+    prompt += `  + CareerPathTimeline: { title, subtitle, steps: [{year, title, company, description}] } (Dòng thời gian sự nghiệp/kinh nghiệm làm việc)\n`;
+    prompt += `  + RecipeCardGrid: { title, subtitle, recipes: [{title, time, difficulty, image, calories}] } (Lưới thẻ công thức nấu ăn/món ăn)\n`;
+    prompt += `  + WorkoutPlanTable: { title, subtitle, workouts: [{exercise, sets, reps, rest}] } (Bảng lịch tập luyện chi tiết)\n`;
+    prompt += `  + LegalServiceCard: { title, subtitle, services: [{title, description, icon}] } (Thẻ dịch vụ pháp lý sang trọng)\n`;
+    prompt += `  + CarFeatureHighlight: { title, subtitle, carName, image, features: [{label, value, icon}] } (Trình diễn tính năng xe hơi nổi bật)\n`;
+    prompt += `  + PetProfileCard: { title, subtitle, pets: [{name, breed, age, image, gender}] } (Thẻ hồ sơ thú cưng đáng yêu)\n`;
+    prompt += `  + FinancialCalculatorPreview: { title, subtitle, description, buttonText } (Bản xem trước công cụ tính toán tài chính)\n`;
     prompt += `  + HeroSection: { title, subtitle, cta_text }\n`;
     prompt += `  + BentoGrid: { title, subtitle, items: [{title, description, icon, size: 'small'|'medium'|'large'}] } (Dùng để show tính năng nổi bật kiểu Apple)\n`;
     prompt += `  + StatsRow: { stats: [{label, value, suffix}] } (Dùng để show con số ấn tượng)\n`;
