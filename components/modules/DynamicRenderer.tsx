@@ -116,6 +116,18 @@ import { LegalServiceCard } from './LegalServiceCard';
 import { CarFeatureHighlight } from './CarFeatureHighlight';
 import { PetProfileCard } from './PetProfileCard';
 import { FinancialCalculatorPreview } from './FinancialCalculatorPreview';
+import { LiveWebinarPreview } from './LiveWebinarPreview';
+import { ProductBundleCard } from './ProductBundleCard';
+import { PropertyAmenitiesGrid } from './PropertyAmenitiesGrid';
+import { PricingToggleTable } from './PricingToggleTable';
+import { CourseModuleAccordion } from './CourseModuleAccordion';
+import { ProjectResultStats } from './ProjectResultStats';
+import { SystemStatusWidget } from './SystemStatusWidget';
+import { ChangelogFeed } from './ChangelogFeed';
+import { NeighborhoodGuide } from './NeighborhoodGuide';
+import { TournamentBracket } from './TournamentBracket';
+import { PackingListChecklist } from './PackingListChecklist';
+import { ChefSpecialCarousel } from './ChefSpecialCarousel';
 
 const moduleMap: Record<string, React.FC<any>> = {
   HeroSection: HeroSection,
@@ -195,6 +207,18 @@ const moduleMap: Record<string, React.FC<any>> = {
   CarFeatureHighlight: CarFeatureHighlight,
   PetProfileCard: PetProfileCard,
   FinancialCalculatorPreview: FinancialCalculatorPreview,
+  LiveWebinarPreview: LiveWebinarPreview,
+  ProductBundleCard: ProductBundleCard,
+  PropertyAmenitiesGrid: PropertyAmenitiesGrid,
+  PricingToggleTable: PricingToggleTable,
+  CourseModuleAccordion: CourseModuleAccordion,
+  ProjectResultStats: ProjectResultStats,
+  SystemStatusWidget: SystemStatusWidget,
+  ChangelogFeed: ChangelogFeed,
+  NeighborhoodGuide: NeighborhoodGuide,
+  TournamentBracket: TournamentBracket,
+  PackingListChecklist: PackingListChecklist,
+  ChefSpecialCarousel: ChefSpecialCarousel,
   SaasLayout: SaasLayout,
   PortfolioLayout: PortfolioLayout,
   AppPromoLayout: AppPromoLayout,

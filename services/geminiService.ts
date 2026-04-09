@@ -66,17 +66,17 @@ export const generateBlueprint = async (
                          template === 'financial' ? 'FinancialLayout' :
                          template === 'logistics' ? 'LogisticsLayout' : 'BakeryLayout';
                          
-      const requiredProps = template === 'saas' ? 'hero, logos, products, metrics, feature_tabs, integrations, tech_stack, feature_comparison, roadmap, live_chat, video_testimonials, faq_search, articles, cta, footer, sticky_cta' : 
-                            template === 'portfolio' ? 'hero, logos, skill_cloud, tech_stack, projects, timeline, certificates, social_feed, testimonial_carousel, career_path, contact, footer' : 
-                            template === 'app_promo' ? 'hero, video, products, metrics, feature_tabs, integrations, tech_stack, app_download, faq_search, cta, footer' :
-                            template === 'ecommerce' ? 'flash_sale, hero, logos, comparison, products, bento, trust_badges, testimonial_carousel, app_download, newsletter, footer, sticky_cta' :
-                            template === 'event' ? 'hero, countdown, video, itinerary, schedule, team, pricing, map, faq_search, footer' :
+      const requiredProps = template === 'saas' ? 'hero, logos, products, metrics, feature_tabs, integrations, tech_stack, pricing_toggle, feature_comparison, roadmap, live_chat, video_testimonials, system_status, changelog, faq_search, articles, cta, footer, sticky_cta' : 
+                            template === 'portfolio' ? 'hero, logos, skill_cloud, tech_stack, projects, project_results, timeline, certificates, social_feed, testimonial_carousel, career_path, contact, footer' : 
+                            template === 'app_promo' ? 'hero, video, products, metrics, feature_tabs, integrations, tech_stack, changelog, app_download, faq_search, cta, footer' :
+                            template === 'ecommerce' ? 'flash_sale, hero, logos, comparison, product_bundle, products, bento, trust_badges, testimonial_carousel, app_download, newsletter, footer, sticky_cta' :
+                            template === 'event' ? 'hero, live_webinar, countdown, video, itinerary, schedule, team, pricing, map, faq_search, footer' :
                             template === 'creator' ? 'profile, video, stats_dashboard, links, metrics, social_feed, articles, lead_magnet, newsletter, footer' :
-                            template === 'course' ? 'hero, video_playlist, metrics, instructor, learning_path, curriculum, certificates, features, pricing, faq_search, footer' :
-                            template === 'restaurant' ? 'hero, gallery, menu_tabs, menu_grid, recipes, highlights, testimonial_carousel, opening_hours, map, booking, footer' :
-                            template === 'real_estate' ? 'hero, search, virtual_tour, properties, metrics, features, testimonial_carousel, map, booking, footer' :
-                            template === 'agency' ? 'hero, logos, skill_cloud, tech_stack, partners, bento, process, team, career_path, jobs, video_testimonials, cta, footer' :
-                            template === 'travel' ? 'hero, gallery, itinerary, features, testimonial_carousel, map, booking, footer' :
+                            template === 'course' ? 'hero, live_webinar, video_playlist, metrics, instructor, learning_path, course_accordion, curriculum, certificates, features, pricing, faq_search, footer' :
+                            template === 'restaurant' ? 'hero, gallery, menu_tabs, menu_grid, chef_specials, recipes, highlights, testimonial_carousel, opening_hours, map, booking, footer' :
+                            template === 'real_estate' ? 'hero, search, virtual_tour, neighborhood, amenities, properties, metrics, features, testimonial_carousel, map, booking, footer' :
+                            template === 'agency' ? 'hero, logos, skill_cloud, tech_stack, partners, bento, project_results, process, team, career_path, jobs, video_testimonials, cta, footer' :
+                            template === 'travel' ? 'hero, gallery, itinerary, packing_list, features, testimonial_carousel, map, booking, footer' :
                             template === 'clinic' ? 'hero, metrics, services, doctors, trust_badges, opening_hours, faq_search, map, booking, footer' :
                             template === 'fitness' ? 'hero, metrics, workouts, classes, schedule, memberships, app_download, booking, footer' :
                             template === 'charity' ? 'hero, fundraising, impact_map, donation_impact, metrics, programs, stories, donate, footer' :
@@ -88,7 +88,7 @@ export const generateBlueprint = async (
                             template === 'wedding' ? 'hero, countdown, gallery, schedule, social_feed, booking, footer' :
                             template === 'book_launch' ? 'hero, countdown, video, instructor, metrics, chapters, social_feed, testimonial_carousel, pricing, footer' :
                             template === 'music_release' ? 'hero, audio, video, social_feed, gallery, listen_now, footer' :
-                            template === 'gaming_guild' ? 'hero, video, leaderboard, social_feed, roster, highlights, join_us, footer' :
+                            template === 'gaming_guild' ? 'hero, video, tournament, leaderboard, social_feed, roster, highlights, join_us, footer' :
                             template === 'car_rental' ? 'hero, car_features, products, process, faq_search, booking, footer' :
                             template === 'pet_care' ? 'hero, pet_profiles, menu_tabs, menu_grid, services, testimonial_carousel, booking, footer' :
                             template === 'crypto_project' ? 'hero, stock_ticker, countdown, tokenomics, metrics, process, roadmap, team, community, footer' :
@@ -103,7 +103,7 @@ export const generateBlueprint = async (
                             template === 'architecture' ? 'hero, projects, metrics, process, booking, footer' :
                             template === 'financial' ? 'hero, stock_ticker, calculator_preview, metrics, process, trust_badges, faq_search, booking, footer' :
                             template === 'logistics' ? 'hero, impact_map, metrics, process, testimonial_carousel, booking, footer' :
-                            'hero, menu_tabs, menu_grid, features, testimonial_carousel, order, footer';
+                            'hero, menu_tabs, menu_grid, chef_specials, recipes, features, testimonial_carousel, order, footer';
                             
       prompt += `\n🔥 YÊU CẦU ĐẶC BIỆT VỀ LAYOUT (BẮT BUỘC TUÂN THỦ 100%):\n`;
       prompt += `- Người dùng đã chọn layout mẫu: ${PREDEFINED_LAYOUTS[template].name}.\n`;
@@ -184,6 +184,18 @@ export const generateBlueprint = async (
     prompt += `  + CarFeatureHighlight: { title, subtitle, carName, image, features: [{label, value, icon}] } (Trình diễn tính năng xe hơi nổi bật)\n`;
     prompt += `  + PetProfileCard: { title, subtitle, pets: [{name, breed, age, image, gender}] } (Thẻ hồ sơ thú cưng đáng yêu)\n`;
     prompt += `  + FinancialCalculatorPreview: { title, subtitle, description, buttonText } (Bản xem trước công cụ tính toán tài chính)\n`;
+    prompt += `  + LiveWebinarPreview: { title, subtitle, webinar: {title, date, host, hostImage, thumbnail} } (Bản xem trước buổi Webinar sắp diễn ra)\n`;
+    prompt += `  + ProductBundleCard: { title, subtitle, mainProduct: {name, image}, addOns: [{name, image, price}], totalPrice, discountPrice } (Gói sản phẩm mua kèm tiết kiệm)\n`;
+    prompt += `  + PropertyAmenitiesGrid: { title, subtitle, amenities: [{label, icon}] } (Lưới tiện ích bất động sản/không gian)\n`;
+    prompt += `  + PricingToggleTable: { title, subtitle, plans: [{name, monthlyPrice, yearlyPrice, features, isPopular}] } (Bảng giá có nút gạt Tháng/Năm)\n`;
+    prompt += `  + CourseModuleAccordion: { title, subtitle, modules: [{title, lessons: [{title, duration}]}] } (Danh sách bài học kiểu Accordion chi tiết)\n`;
+    prompt += `  + ProjectResultStats: { title, subtitle, image, stats: [{label, value, icon}] } (Kết quả dự án với con số ấn tượng)\n`;
+    prompt += `  + SystemStatusWidget: { title, subtitle, services: [{name, status}], uptime } (Widget hiển thị trạng thái hệ thống thời gian thực)\n`;
+    prompt += `  + ChangelogFeed: { title, subtitle, updates: [{version, date, type, description}] } (Danh sách cập nhật tính năng mới/sửa lỗi)\n`;
+    prompt += `  + NeighborhoodGuide: { title, subtitle, places: [{name, distance, type, rating}] } (Hướng dẫn khu vực lân cận - trường học, bệnh viện...)\n`;
+    prompt += `  + TournamentBracket: { title, subtitle, matches: [{team1, team2, score1, score2, status}] } (Sơ đồ thi đấu/kết quả trận đấu eSports)\n`;
+    prompt += `  + PackingListChecklist: { title, subtitle, items: [{name, category, essential}] } (Danh sách đồ cần chuẩn bị khi đi du lịch)\n`;
+    prompt += `  + ChefSpecialCarousel: { title, subtitle, specials: [{name, description, price, image, tag}] } (Trình trượt giới thiệu món đặc biệt của đầu bếp)\n`;
     prompt += `  + HeroSection: { title, subtitle, cta_text }\n`;
     prompt += `  + BentoGrid: { title, subtitle, items: [{title, description, icon, size: 'small'|'medium'|'large'}] } (Dùng để show tính năng nổi bật kiểu Apple)\n`;
     prompt += `  + StatsRow: { stats: [{label, value, suffix}] } (Dùng để show con số ấn tượng)\n`;
