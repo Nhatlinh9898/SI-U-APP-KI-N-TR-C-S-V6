@@ -62,11 +62,11 @@ export const PricingToggleTable = ({ title, subtitle, plans, primary_color = 'bl
               <div className="h-px bg-gray-100 mb-12" />
 
               <ul className="space-y-6 mb-16 flex-grow">
-                {plan.features.map((feat, i) => {
-                  const isObject = typeof feat === 'object';
-                  const name = isObject ? feat.name : feat;
-                  const included = isObject ? feat.included : true;
-                  const desc = isObject ? feat.description : null;
+                {Array.isArray(plan.features) && plan.features.map((feat, i) => {
+                  const isObject = typeof feat === 'object' && feat !== null;
+                  const name = isObject ? (feat as any).name : feat;
+                  const included = isObject ? (feat as any).included : true;
+                  const desc = isObject ? (feat as any).description : null;
 
                   return (
                     <li key={i} className={`flex flex-col gap-2 ${included ? 'text-gray-700' : 'text-gray-300'}`}>

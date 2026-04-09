@@ -98,7 +98,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({ title, subtitle, pla
               <div className="space-y-6 mb-12 flex-1">
                 <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 pb-4">Tính năng bao gồm:</div>
                 <ul className="space-y-4">
-                  {plan.features?.map((feature, j) => (
+                  {Array.isArray(plan.features) && plan.features.map((feature, j) => (
                     <li key={j} className="flex items-start gap-4 text-sm font-bold text-gray-700 group-hover:translate-x-1 transition-transform">
                       <div className="w-6 h-6 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 shadow-sm">
                         <Check size={14} strokeWidth={4} />
@@ -106,7 +106,7 @@ export const PricingTable: React.FC<PricingTableProps> = ({ title, subtitle, pla
                       <span className="leading-tight">{feature}</span>
                     </li>
                   ))}
-                  {plan.unavailableFeatures?.map((feature, j) => (
+                  {Array.isArray(plan.unavailableFeatures) && plan.unavailableFeatures.map((feature, j) => (
                     <li key={j} className="flex items-start gap-4 text-sm font-bold text-gray-300">
                       <div className="w-6 h-6 rounded-xl bg-gray-50 text-gray-300 flex items-center justify-center shrink-0">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M6 18L18 6M6 6l12 12"></path></svg>
