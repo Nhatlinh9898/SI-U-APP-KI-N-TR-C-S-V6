@@ -1,6 +1,20 @@
 import React from 'react';
 
-export const FinancialCalculatorPreview = ({ title, subtitle, description, buttonText, primary_color = 'blue' }: any) => {
+export const FinancialCalculatorPreview = ({ title, subtitle, description, buttonText, calculatorData, primary_color = 'blue' }: any) => {
+  const defaultData = {
+    label: 'Số tiền vay',
+    value: '500,000,000',
+    unit: 'VNĐ',
+    fields: [
+      { label: 'Lãi suất', value: '7.5', unit: '%' },
+      { label: 'Thời hạn', value: '10', unit: 'Năm' }
+    ],
+    resultLabel: 'Ước tính trả hàng tháng',
+    resultValue: '5,935,000 VNĐ'
+  };
+
+  const data = calculatorData || defaultData;
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,31 +33,26 @@ export const FinancialCalculatorPreview = ({ title, subtitle, description, butto
             <div className="bg-white rounded-[32px] p-8 shadow-2xl">
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest">Số tiền vay</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest">{data.label}</label>
                   <div className="relative">
-                    <input type="text" defaultValue="500,000,000" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 font-bold text-gray-900 focus:ring-2 focus:ring-blue-500" />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">VNĐ</span>
+                    <input type="text" defaultValue={data.value} className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 font-bold text-gray-900 focus:ring-2 focus:ring-blue-500" />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">{data.unit}</span>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest">Lãi suất</label>
-                    <div className="relative">
-                      <input type="text" defaultValue="7.5" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 font-bold text-gray-900 focus:ring-2 focus:ring-blue-500" />
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">%</span>
+                  {data.fields.map((field: any, i: number) => (
+                    <div key={i} className="space-y-2">
+                      <label className="text-xs font-black text-gray-400 uppercase tracking-widest">{field.label}</label>
+                      <div className="relative">
+                        <input type="text" defaultValue={field.value} className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 font-bold text-gray-900 focus:ring-2 focus:ring-blue-500" />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">{field.unit}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest">Thời hạn</label>
-                    <div className="relative">
-                      <input type="text" defaultValue="10" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 font-bold text-gray-900 focus:ring-2 focus:ring-blue-500" />
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400">Năm</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
                 <div className={`p-6 bg-${primary_color}-50 rounded-2xl border border-${primary_color}-100`}>
-                  <div className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Ước tính trả hàng tháng</div>
-                  <div className={`text-3xl font-black text-${primary_color}-600`}>5,935,000 VNĐ</div>
+                  <div className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{data.resultLabel}</div>
+                  <div className={`text-3xl font-black text-${primary_color}-600`}>{data.resultValue}</div>
                 </div>
               </div>
             </div>

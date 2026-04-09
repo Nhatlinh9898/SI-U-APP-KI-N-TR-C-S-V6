@@ -7,7 +7,7 @@ interface TrackingStep {
   isCompleted: boolean;
 }
 
-export const LogisticsLiveTracking = ({ title, subtitle, trackingId, steps, primary_color = 'blue' }: any) => {
+export const LogisticsLiveTracking = ({ title, subtitle, trackingId, steps, packageDetails, primary_color = 'blue' }: any) => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
@@ -23,12 +23,14 @@ export const LogisticsLiveTracking = ({ title, subtitle, trackingId, steps, prim
         <div className="bg-white rounded-[64px] p-10 md:p-20 shadow-2xl border border-gray-100 overflow-hidden relative">
           <div className={`absolute top-0 right-0 w-96 h-96 bg-${primary_color}-600/5 blur-[100px] rounded-full -mr-48 -mt-48`}></div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div>
-              <h2 className="text-4xl font-black text-gray-900 mb-6 leading-tight">{title || 'Theo dõi đơn hàng'}</h2>
-              <p className="text-lg text-gray-500 mb-10">{subtitle || 'Cập nhật trạng thái vận chuyển thời gian thực cho kiện hàng của bạn.'}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start relative z-10">
+            <div className="space-y-12">
+              <div>
+                <h2 className="text-4xl font-black text-gray-900 mb-6 leading-tight">{title || 'Theo dõi đơn hàng'}</h2>
+                <p className="text-lg text-gray-500">{subtitle || 'Cập nhật trạng thái vận chuyển thời gian thực cho kiện hàng của bạn.'}</p>
+              </div>
               
-              <div className="relative mb-12">
+              <div className="relative">
                 <input 
                   type="text" 
                   defaultValue={trackingId || 'LGS-992837465'} 
@@ -37,6 +39,17 @@ export const LogisticsLiveTracking = ({ title, subtitle, trackingId, steps, prim
                 <button className={`absolute right-3 top-3 bottom-3 px-8 bg-${primary_color}-600 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-${primary_color}-600/30`}>
                   Tra cứu
                 </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                  <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Trọng lượng</div>
+                  <div className="font-bold text-gray-900">{packageDetails?.weight || '2.5 kg'}</div>
+                </div>
+                <div className="p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                  <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Dự kiến giao</div>
+                  <div className="font-bold text-gray-900">{packageDetails?.estimatedDelivery || 'Hôm nay'}</div>
+                </div>
               </div>
 
               <div className="p-8 bg-gray-900 rounded-[40px] text-white shadow-2xl group">
@@ -60,8 +73,8 @@ export const LogisticsLiveTracking = ({ title, subtitle, trackingId, steps, prim
               </div>
             </div>
 
-            <div className="space-y-10 relative">
-              <div className="absolute left-[27px] top-4 bottom-4 w-1 bg-gray-100 rounded-full">
+            <div className="space-y-10 relative pt-4">
+              <div className="absolute left-[27px] top-8 bottom-8 w-1 bg-gray-100 rounded-full">
                 <div 
                   className={`absolute top-0 w-full bg-${primary_color}-600 rounded-full transition-all duration-1000 ease-in-out`}
                   style={{ height: `${(activeStep / (steps.length - 1)) * 100}%` }}

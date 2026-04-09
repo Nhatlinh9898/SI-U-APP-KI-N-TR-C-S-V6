@@ -7,6 +7,8 @@ interface ProjectDetail {
   area: string;
   materials: string[];
   description: string;
+  challenge: string;
+  solution: string;
   images: string[];
 }
 
@@ -39,9 +41,21 @@ export const InteriorProjectDetail = ({ title, subtitle, projects, primary_color
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 aspect-[16/9] rounded-[48px] overflow-hidden shadow-2xl group">
-                  <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" referrerPolicy="no-referrer" />
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div className="lg:col-span-2 space-y-12">
+                  <div className="aspect-[16/9] rounded-[48px] overflow-hidden shadow-2xl group">
+                    <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="p-8 bg-gray-50 rounded-[40px] border border-gray-100">
+                      <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Thách thức thiết kế</h4>
+                      <p className="text-gray-600 leading-relaxed italic">"{project.challenge}"</p>
+                    </div>
+                    <div className="p-8 bg-blue-50 rounded-[40px] border border-blue-100">
+                      <h4 className="text-xs font-black text-blue-400 uppercase tracking-widest mb-4">Giải pháp sáng tạo</h4>
+                      <p className="text-gray-900 font-medium leading-relaxed">{project.solution}</p>
+                    </div>
+                  </div>
                 </div>
                 <div className="space-y-8">
                   <div className="aspect-square rounded-[40px] overflow-hidden shadow-xl group">
